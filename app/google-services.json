@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "708537670210",
+    "project_id": "appdenunciacliente",
+    "storage_bucket": "appdenunciacliente.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708537670210:android:7ecdd4171cc196e9696bdb",
+        "android_client_info": {
+          "package_name": "com.example.appdenunciacliente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708537670210-mqlnon4ot2j2uhp7pvk4vchahel7o0mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWAnU-ThIWkdtATE_mL5o16_UIBSk6z2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708537670210-mqlnon4ot2j2uhp7pvk4vchahel7o0mf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

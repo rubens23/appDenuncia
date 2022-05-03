@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">appDenunciaCliente</string>
+    <string-array name="tiposReclamacao">
+        <item>Educação</item>
+        <item>Saneamento</item>
+        <item>Iluminação</item>
+        <item>Mobilidade</item>
+        <item>Saúde</item>
+        <item>Transporte</item>
+        <item>outro</item>
+    </string-array>
+
+</resources>
