@@ -1,15 +1,13 @@
 package com.example.appdenunciacliente;
 
-public class Minha_Reclamacao {
+import androidx.recyclerview.widget.RecyclerView;
+
+public class Minha_Reclamacao{
     String reclamacao;
     String status;
+    String codigo_reclamacao;
 
     public Minha_Reclamacao(){}
-
-    public Minha_Reclamacao(String reclamacao, String status) {
-        this.reclamacao = reclamacao;
-        this.status = status;
-    }
 
     public String getReclamacao() {
         return reclamacao;
@@ -17,6 +15,14 @@ public class Minha_Reclamacao {
 
     public void setReclamacao(String reclamacao) {
         this.reclamacao = reclamacao;
+    }
+
+    public String getCodigo_reclamacao(){
+        return codigo_reclamacao;
+    }
+
+    public void setCodigo_reclamacao(String codigo){
+        this.codigo_reclamacao = codigo;
     }
 
     public String getStatus() {

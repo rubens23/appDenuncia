@@ -20,6 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="70dp"
+        android:elevation="1000dp"
+        android:backgroundTint="@color/altblack"
         app:cardCornerRadius="4dp"
         android:layout_marginEnd="10dp">
 
@@ -29,9 +31,10 @@
 
             <ImageView
                 android:id="@+id/icone1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background" />
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/loudspeaker" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,8 +43,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/icone1"
                 android:text="Adicionar \nReclamações"
-                android:textColor="@color/black"
-                android:textSize="33sp"/>
+                android:textColor="@color/verdeClaro"
+                android:textSize="33sp" />
 
 
         </RelativeLayout>
@@ -56,17 +59,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/altblack"
         app:cardCornerRadius="4dp"
         android:layout_marginEnd="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/icone2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"/>
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/complaint" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,8 +80,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/icone2"
-                android:text="suas \nreclamações"
-                android:textColor="@color/black"
+                android:text="Minhas \nReclamações"
+                android:textColor="@color/verdeClaro"
                 android:textSize="33sp" />
 
 
@@ -86,21 +92,25 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/btn_reclamacoes_comunidade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/altblack"
         app:cardCornerRadius="4dp"
         android:layout_marginEnd="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/icone3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"/>
+                android:layout_width="108dp"
+                android:layout_height="108dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/conversation" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,9 +118,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/icone3"
-                android:text="Reclamações \nComunidade"
-                android:textColor="@color/black"
-                android:textSize="33sp"/>
+                android:text="Reclamações da\nComunidade"
+                android:textColor="@color/verdeClaro"
+                android:textSize="33sp" />
 
 
         </RelativeLayout>

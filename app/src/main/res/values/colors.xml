@@ -8,5 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="verdeClaro">#21A826</color>
+    <color name="verdeEscuro">#367C3A</color>
     <color name="red">#C31313</color>
+    <color name="altblack">#222222</color>
+    <color name="altred">#20222222</color>
+    <color name="transparent">#4D37A09F</color>
+
 </resources>

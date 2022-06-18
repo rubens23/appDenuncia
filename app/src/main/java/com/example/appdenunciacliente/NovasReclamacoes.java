@@ -2,6 +2,7 @@ package com.example.appdenunciacliente;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,6 +70,8 @@ public class NovasReclamacoes extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        ((TextView)parent.getChildAt(0)).setTextColor(Color.WHITE);
+        ((TextView)parent.getChildAt(0)).setTextSize(20);
         parent.getItemAtPosition(pos);
         String item = (String)parent.getItemAtPosition(pos);
         if(!item.equals("outro")){

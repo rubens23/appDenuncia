@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_minha_reclamacao"
         android:layout_width="match_parent"
+        app:cardCornerRadius="0dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="8dp"
+        android:backgroundTint="@color/altblack"
         android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imagem_reclamacao"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher_background" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_newImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_minha_reclamacao"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="3dp"
+                android:backgroundTint="@color/altblack"
+                android:src="@drawable/ic_baseline_add_a_photo_24"
+                android:visibility="visible"
+                app:borderWidth="0dp"
+                app:tint="@color/white" />
 
 
             <ImageView
                 android:id="@+id/img_view_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/imagem_reclamacao"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_baseline_favorite_border_24" />
@@ -26,40 +54,65 @@
                 android:id="@+id/contador_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:layout_marginTop="26dp"
                 android:layout_toRightOf="@id/img_view_like"
-                android:layout_marginTop="26dp"/>
+                android:text="0"
+                android:layout_below="@id/imagem_reclamacao"
+                android:textColor="@color/white" />
 
 
             <TextView
                 android:id="@+id/tv_minha_reclamacao"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_below="@id/imagem_reclamacao"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="14dp"
                 android:layout_toRightOf="@id/img_view_like"
                 android:text="A minha reclamação é essa.."
-                android:textColor="@color/black" />
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/label_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_minha_reclamacao"
-                android:layout_marginStart="20dp"
-                android:layout_toRightOf="@id/img_view_like"
+                android:layout_marginStart="40dp"
                 android:layout_marginBottom="10dp"
-                android:text="status: " />
+                android:layout_toRightOf="@id/img_view_like"
+                android:text="status: "
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/tv_status"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_minha_reclamacao"
                 android:layout_toRightOf="@id/label_status"
-                android:textColor="@color/red"
-                android:text="resolvida" />
+                android:text="resolvida"
+                android:textColor="@color/red" />
 
+            <TextView
+                android:id="@+id/btn_comentario2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_minha_reclamacao"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/btn_comentarios1"
+                android:text="Comentários"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btn_comentarios1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_minha_reclamacao"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@id/tv_status"
+                android:src="@drawable/ic_baseline_comment_24" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

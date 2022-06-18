@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="70dp"
+        android:backgroundTint="@color/altblack"
         app:cardCornerRadius="4dp"
         android:layout_marginEnd="10dp">
 
@@ -37,6 +38,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:textColor="@color/verdeClaro"
             android:layout_marginBottom="4dp"
             android:textSize="18sp"/>
 
@@ -60,6 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:hint="Digite a sua reclamação"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"/>
@@ -71,8 +75,9 @@
             android:text="ENVIAR RECLAMAÇÃO"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:textSize="20dp"
             android:textColor="@color/white"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="5dp"
             android:backgroundTint="@color/verdeClaro"
             />
 

@@ -10,8 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppDenunciaCliente">
         <activity
-            android:name=".ActivityMinhasReclamacoes"
+            android:name=".ComentariosActivity"
             android:exported="false" />
+        <activity
+            android:name=".ReclamacoesComunidade"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityMinhasReclamacoes"
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".NovasReclamacoes"
             android:exported="false" />
