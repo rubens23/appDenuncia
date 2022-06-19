@@ -78,8 +78,11 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
 
 
     public void bindData(Minha_Reclamacao mr, Uri pathUri, DataComplaintsImages dci){
+        String retornoInsercao = bd.inserirNaTabelaImagens(dci.getCodigo_reclamacao(),
+                FirebaseAuth.getInstance().getUid(), dci.getLink_imagem());
+        Toast.makeText(ctx, "retorno da inserção: "+retornoInsercao, Toast.LENGTH_LONG).show();
         if(mr.getCodigo_reclamacao().equals(dci.getCodigo_reclamacao())){
-            Toast.makeText(ctx, "os itens tem o mesmo complaint id", Toast.LENGTH_LONG).show();
+            //Toast.makeText(ctx, "os itens tem o mesmo complaint id", Toast.LENGTH_LONG).show();
             //Chamo o picasso para passar o link da imagem para a imageView
             //do item atual
         }

@@ -67,6 +67,7 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
         adapter.setItems(listaReclamacoes);
 
         Cursor dadosTabelaImagem = bd.getAllDataFromImagesTable();
+
         if(dadosTabelaImagem != null){
             do{
                 DataComplaintsImages dci = new DataComplaintsImages();
@@ -76,6 +77,8 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
             }while (dadosTabelaImagem.moveToNext());
             adapter.setImageComplaintsItems(listaLinkImagens);
         }
+
+         //todo como vou fazer para inserir dados na tabela imagens, como vou ter acesso a todos os dados que preciso para preenche-la
 
     }
 
