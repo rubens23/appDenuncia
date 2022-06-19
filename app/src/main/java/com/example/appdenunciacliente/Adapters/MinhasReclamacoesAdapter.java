@@ -10,9 +10,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appdenunciacliente.DataComplaintsImages;
 import com.example.appdenunciacliente.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
 import com.example.appdenunciacliente.ViewHolders.MinhaReclamacaoViewHolder;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -21,6 +23,7 @@ import java.util.List;
 
 public class MinhasReclamacoesAdapter extends RecyclerView.Adapter<MinhaReclamacaoViewHolder> {
     private List<Minha_Reclamacao> lista = new ArrayList<Minha_Reclamacao>();
+    private List<DataComplaintsImages> lista_link_imagens = new ArrayList<>();
     private Context context;
     private Uri filepath;
 
@@ -37,11 +40,12 @@ public class MinhasReclamacoesAdapter extends RecyclerView.Adapter<MinhaReclamac
     @Override
     public void onBindViewHolder(@NonNull MinhaReclamacaoViewHolder holder, int position) {
         Minha_Reclamacao mr = lista.get(position);//aqui ele pega um objeto e manda para esse onBindViewHolder
-        holder.bindData(mr, filepath);
-
-
+        DataComplaintsImages dci = lista_link_imagens.get(position);
+        holder.bindData(mr, filepath, dci);
 
     }
+
+
 
     public void setItems(List<Minha_Reclamacao> arrayMR){
         lista.addAll(arrayMR);
@@ -57,4 +61,7 @@ public class MinhasReclamacoesAdapter extends RecyclerView.Adapter<MinhaReclamac
     }
 
 
+    public void setImageComplaintsItems(List<DataComplaintsImages> listaLinkImagens) {
+        lista_link_imagens.addAll(listaLinkImagens);
+    }
 }

@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.appdenunciacliente.BancoController;
+import com.example.appdenunciacliente.DataComplaintsImages;
 import com.example.appdenunciacliente.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
 import com.example.appdenunciacliente.ReclamacoesCurtidosPorUser;
@@ -42,18 +43,20 @@ import java.util.UUID;
 //TODO colocar o onclick do botao de abrir para comentar.
 
 public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
-    TextView text_view_reclamacao, text_view_label_status,
-            text_view_status, cont_likes;
-    ImageView heart_btn, imagem_reclamacao;
-    FloatingActionButton btn_newImage;
-    Context ctx;
-    FirebaseUser user;
-    FirebaseStorage storage;
-    StorageReference storageReference;
-    BancoController bd;
+    private final TextView text_view_reclamacao;
+    private final TextView text_view_label_status;
+    private final TextView text_view_status;
+    private final TextView cont_likes;
+    private ImageView heart_btn, imagem_reclamacao;
+    private final FloatingActionButton btn_newImage;
+    private final Context ctx;
+    private final FirebaseUser user;
+    private final FirebaseStorage storage;
+    private final StorageReference storageReference;
+    private final BancoController bd;
     private Uri filePath;
 
-    private final int PICK_IMAGE_REQUEST = 2;//eu coloquei qualquer valor aqui deliberadamente
+
 
     public MinhaReclamacaoViewHolder(@NonNull View itemView){
         super(itemView);
@@ -74,20 +77,26 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void bindData(Minha_Reclamacao mr, Uri pathUri){
+    public void bindData(Minha_Reclamacao mr, Uri pathUri, DataComplaintsImages dci){
+        if(mr.getCodigo_reclamacao().equals(dci.getCodigo_reclamacao())){
+            Toast.makeText(ctx, "os itens tem o mesmo complaint id", Toast.LENGTH_LONG).show();
+            //Chamo o picasso para passar o link da imagem para a imageView
+            //do item atual
+        }
         filePath = pathUri;
         if(user != null){
             if(filePath != null){
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(ctx.getContentResolver(), filePath);
-                    imagem_reclamacao.setImageBitmap(bitmap);
+                    //imagem_reclamacao.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             btn_newImage.setOnClickListener(v->{
-                selectImage();
-                uploadImage2();
+                String idReclamacao = mr.getCodigo_reclamacao();
+                selectImage(idReclamacao);
+                //uploadImage2();
                 //aqui eu posso implementar a intent para o usuario escolher a imagem
 
                 //aqui eu posso usar um método para pegar o id da reclamação associado a essa reclamacao que o usuario acabou de clicar
@@ -96,7 +105,7 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
             });
         }
 
-
+        putComplaintImages(mr);
         putComplaintsInRecyclerView(mr);
         verifyIfUserAlreadyLikedSpecificComplaint(mr);
         setLikesCounter(mr);
@@ -133,17 +142,22 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    private void selectImage(){
+    private void putComplaintImages(Minha_Reclamacao mr) {
+        //aqui vai o codigo para colocar as imagens
+        //nos itens da recycler view
+    }
+
+    private void selectImage(String id_reclamacao){
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        ((Activity)ctx).startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem para a sua denúncia"), PICK_IMAGE_REQUEST);
+        ((Activity)ctx).startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem para a sua denúncia"), 2);
 
     }
 
     public void uploadImage2(){
+        //outro metodo para fazer upload de imagens...para que eu fiz dois
         StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
-        Toast.makeText(ctx, ""+filePath, Toast.LENGTH_SHORT).show();
         //ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
        //     @Override
         //    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

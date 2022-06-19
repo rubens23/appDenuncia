@@ -242,4 +242,17 @@ public class BancoController {
     }
 
 
+    public Cursor getAllDataFromImagesTable() {
+        Cursor cursor;
+        db = banco.getReadableDatabase();
+        String[] camposSelecionados= {"id_reclamacao", "link_imagem"};
+        String condicao = "link_imagem IS NOT NULL";
+
+        cursor = db.query("imagens_denuncias", camposSelecionados, condicao, null, null, null, null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
+            return cursor;
+        }
+        return null;
+    }
 }

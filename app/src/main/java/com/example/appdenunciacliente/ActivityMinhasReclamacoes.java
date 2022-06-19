@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.appdenunciacliente.Adapters.MinhasReclamacoesAdapter;
 import com.example.appdenunciacliente.ViewHolders.MinhaReclamacaoViewHolder;
+import com.example.appdenunciacliente.databinding.ActivityMinhasReclamacoesBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,29 +29,66 @@ import java.util.UUID;
 
 public class ActivityMinhasReclamacoes extends AppCompatActivity {
 
-    private final int PICK_IMAGE_REQUEST = 2;
+    //variaveis globais
+
+    private ActivityMinhasReclamacoesBinding binding;
     private Uri filePath;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+    private BancoController bd;
 
     String user_id;
     List<Minha_Reclamacao> lista = new ArrayList<>();
+    List<DataComplaintsImages> listaLinkImagens = new ArrayList<>();
     MinhasReclamacoesAdapter adapter;
-    RecyclerView recyclerView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityMinhasReclamacoesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        bd = new BancoController(ActivityMinhasReclamacoes.this);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+
+
+        LinearLayoutManager lm = new LinearLayoutManager(this);
+        binding.recyclerMinhasReclamacoes.setLayoutManager(lm);
+        adapter = new MinhasReclamacoesAdapter(this);
+        binding.recyclerMinhasReclamacoes.setAdapter(adapter);
+
+        List<Minha_Reclamacao> listaReclamacoes = null;
+        listaReclamacoes = getDadosReclamacaoUsuario();
+        adapter.setItems(listaReclamacoes);
+
+        Cursor dadosTabelaImagem = bd.getAllDataFromImagesTable();
+        if(dadosTabelaImagem != null){
+            do{
+                DataComplaintsImages dci = new DataComplaintsImages();
+                dci.setCodigo_reclamacao(dadosTabelaImagem.getString(0));
+                dci.setLink_imagem(dadosTabelaImagem.getString(1));
+                listaLinkImagens.add(dci);
+            }while (dadosTabelaImagem.moveToNext());
+            adapter.setImageComplaintsItems(listaLinkImagens);
+        }
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST
+        if(requestCode == 2
         && resultCode == RESULT_OK
         && data != null
         && data.getData() != null){
             filePath = data.getData();
-
-
-
-            //TODO DEnovo o problema da resposta assíncrona....será que eu já sei resolver isso?
+            Toast.makeText(this, "To no onActivity result", Toast.LENGTH_LONG).show();
+            uploadImage();
 
         }
     }
@@ -60,6 +98,7 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
         super.onResume();
         if(filePath != null){
             adapter.setUris(filePath);
+
             //uploadImage();
 
         }
@@ -76,49 +115,14 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String id_user = user.getUid();
                 Toast.makeText(ActivityMinhasReclamacoes.this, "imagem salva com sucesso!", Toast.LENGTH_SHORT).show();
-                BancoController bd = new BancoController(ActivityMinhasReclamacoes.this);
-                //String retorno = bd.inserirNaTabelaImagens();//id_reclamacao, user_id, link_imagem
-                //TODO fazer uma restrição. O usuário só pode salvar a imagem se no banco de dados id_user e id_reclamacao estiverem associados a esse user, se sim pode salvar na tabela de imagens
-                //fazer o metodo para salvar as inforamções no banco de dados
+                //String retorno = bd.inserirNaTabelaImagens(adapter.getCurrentComplaintItemId());//id_reclamacao, user_id, link_imagem
 
             }
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_minhas_reclamacoes);
-
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-
-        recyclerView = findViewById(R.id.recycler_minhas_reclamacoes);
-
-
-        LinearLayoutManager lm = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(lm);
-        adapter = new MinhasReclamacoesAdapter(this);
-        recyclerView.setAdapter(adapter);
-
-
-
-
-
-
-        List<Minha_Reclamacao> listaReclamacoes = null;
-        listaReclamacoes = getDadosReclamacaoUsuario();
-        adapter.setItems(listaReclamacoes);
-
-
-
-
-
-
-
-
-
-
+    public String getImageLink(Uri uri){
+        return uri.toString();
     }
 
     public List<Minha_Reclamacao> getDadosReclamacaoUsuario(){
@@ -130,72 +134,21 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
             Toast.makeText(this, "não foi possível conseguir o id do usuario", Toast.LENGTH_SHORT).show();
         }
         BancoController bd = new BancoController(getBaseContext());
-        Cursor retorno = bd.carregaDadoPeloUserId(user_id);
-        int total_rows = retorno.getCount();
+        Cursor cursorDadosReclamacao = bd.carregaDadoPeloUserId(user_id);
 
-        String total_linhas = Integer.toString(total_rows);
-        if (retorno != null) {
+
+        if (cursorDadosReclamacao != null) {
             do{
                 Minha_Reclamacao mr = new Minha_Reclamacao();
-                mr.setReclamacao(retorno.getString(0));
-                mr.setStatus(retorno.getString(1));
-                mr.setCodigo_reclamacao(retorno.getString(2));
+                mr.setReclamacao(cursorDadosReclamacao.getString(0));
+                mr.setStatus(cursorDadosReclamacao.getString(1));
+                mr.setCodigo_reclamacao(cursorDadosReclamacao.getString(2));
                 lista.add(mr);
-            }while(retorno.moveToNext());
-            /*
-            Minha_Reclamacao mr = new Minha_Reclamacao();
-            String recl1 = retorno.getString(0);
-            String status1 = retorno.getString(1);
-            tv_retorno.setText(recl1);
-            tv_retorno_status.setText(status1);
-
-             */
-
-
+            }while(cursorDadosReclamacao.moveToNext());
         }else{
             Toast.makeText(this, "o cursor está vazio", Toast.LENGTH_SHORT).show();
+            return null;
         }
         return lista;
     }
-
-    public class CallApi extends AsyncTask<String, String, String> {
-        public AsyncResponse delegate = null;//Call back interface
-
-        public CallApi(AsyncResponse asyncResponse){
-            delegate = asyncResponse;//Assigning call back interface through constructor
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            //Your network call or background process comes here
-            return "res";
-        }
-
-        @Override
-        protected void onPostExecute(String aVoid) {
-            super.onPostExecute(aVoid);
-            delegate.processFinish(aVoid);
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-        }
-    }
 }
-
-//token github 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
-
-//dar um passo atras e tentar entender melhor sobre esses bancos de dados
-//começar a considerar fazer só os wireframes mesmo. Pq é provavel que n de tempo.
-//eu ainda tenho que gravar o video do projeto.
-
-//responder essas perguntas:
-//1- pq o criabanco2 n funcionou?
-//2- pq o pnUpgrade n funciona direito
-//e funciona só quando quer?
