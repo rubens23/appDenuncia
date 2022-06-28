@@ -5,16 +5,13 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appdenunciacliente.Minha_Reclamacao;
+import com.example.appdenunciacliente.models.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
 import com.example.appdenunciacliente.ViewHolders.MinhaReclamacaoViewHolder;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;

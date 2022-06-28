@@ -1,10 +1,9 @@
-package com.example.appdenunciacliente
+package com.example.appdenunciacliente.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import com.example.appdenunciacliente.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_registro.*
 

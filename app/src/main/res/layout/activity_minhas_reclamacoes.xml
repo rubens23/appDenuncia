@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/background1"
-    tools:context=".ActivityMinhasReclamacoes">
+    tools:context=".activities.ActivityMinhasReclamacoes">
 
     <TextView
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.appdenunciacliente;
+package com.example.appdenunciacliente.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,42 +6,49 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.appdenunciacliente.Adapters.ReclamacoesComunidadeAdapter;
+import com.example.appdenunciacliente.R;
+import com.example.appdenunciacliente.database.BancoController;
+import com.example.appdenunciacliente.models.Minha_Reclamacao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReclamacoesComunidade extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    BancoController bd;
-    ReclamacoesComunidadeAdapter adapter;
-    List<Minha_Reclamacao> listaTodasReclamacoes;
-    int cont = 1;
+    private RecyclerView recyclerView;
+    private BancoController bd;
+    private ReclamacoesComunidadeAdapter adapterReclamacoesComunidade;
+    private List<Minha_Reclamacao> listaTodasReclamacoes;
+    private LinearLayoutManager linearLayoutManager;
+    private final int CONT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reclamacoes_comunidade);
 
+        initClassMembers();
+
+        getAllComplaintsSentByEveryoneAndSendItToAdapter();
+
+    }
+
+
+
+    private void initClassMembers() {
         bd = new BancoController(this);
-        adapter = new ReclamacoesComunidadeAdapter(this);
+        adapterReclamacoesComunidade = new ReclamacoesComunidadeAdapter(this);
         recyclerView = findViewById(R.id.recycler_reclamacoes_comunidade);
-        LinearLayoutManager lm = new LinearLayoutManager(this);
+        linearLayoutManager = new LinearLayoutManager(this);
+    }
 
-
-
-
-
-
+    private void getAllComplaintsSentByEveryoneAndSendItToAdapter() {
         listaTodasReclamacoes = getAllComplaintsList();
-        adapter.setItemList(listaTodasReclamacoes);
-        recyclerView.setLayoutManager(lm);
-        recyclerView.setAdapter(adapter);
-
-
+        adapterReclamacoesComunidade.setItemList(listaTodasReclamacoes);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapterReclamacoesComunidade);
     }
 
     public List<Minha_Reclamacao> getAllComplaintsList(){

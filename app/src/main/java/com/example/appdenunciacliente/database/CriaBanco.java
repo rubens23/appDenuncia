@@ -1,4 +1,4 @@
-package com.example.appdenunciacliente;
+package com.example.appdenunciacliente.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

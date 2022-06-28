@@ -6,14 +6,13 @@ import android.database.Cursor;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appdenunciacliente.BancoController;
-import com.example.appdenunciacliente.ComentariosActivity;
-import com.example.appdenunciacliente.Minha_Reclamacao;
+import com.example.appdenunciacliente.database.BancoController;
+import com.example.appdenunciacliente.activities.ComentariosActivity;
+import com.example.appdenunciacliente.models.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

@@ -1,4 +1,4 @@
-package com.example.appdenunciacliente;
+package com.example.appdenunciacliente.models;
 
 public class ReclamacoesCurtidosPorUser {
     String codigo_reclamacao_curtida;

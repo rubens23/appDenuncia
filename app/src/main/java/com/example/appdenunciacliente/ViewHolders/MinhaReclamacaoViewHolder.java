@@ -15,39 +15,31 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-
-
-import com.example.appdenunciacliente.BancoController;
-import com.example.appdenunciacliente.Minha_Reclamacao;
+import com.example.appdenunciacliente.database.BancoController;
+import com.example.appdenunciacliente.models.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
-import com.example.appdenunciacliente.ReclamacoesCurtidosPorUser;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 //TODO colocar o onclick do botao de abrir para comentar.
 
 public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
-    TextView text_view_reclamacao, text_view_label_status,
+    private TextView text_view_reclamacao, text_view_label_status,
             text_view_status, cont_likes;
-    ImageView heart_btn, imagem_reclamacao;
-    FloatingActionButton btn_newImage;
-    Context ctx;
-    FirebaseUser user;
-    FirebaseStorage storage;
-    StorageReference storageReference;
-    BancoController bd;
+    private ImageView heart_btn, imagem_reclamacao;
+    private FloatingActionButton btn_newImage;
+    private Context ctx;
+    private FirebaseUser user;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+    private BancoController bd;
     private Uri filePath;
 
     private final int PICK_IMAGE_REQUEST = 2;//eu coloquei qualquer valor aqui deliberadamente
@@ -55,6 +47,12 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
     public MinhaReclamacaoViewHolder(@NonNull View itemView){
         super(itemView);
 
+        initViewHolderItems();
+
+
+    }
+
+    private void initViewHolderItems() {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 

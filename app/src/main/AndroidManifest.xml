@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppDenunciaCliente">
         <activity
-            android:name=".ComentariosActivity"
+            android:name=".activities.ComentariosActivity"
             android:exported="false" />
         <activity
-            android:name=".ReclamacoesComunidade"
+            android:name=".activities.ReclamacoesComunidade"
             android:exported="false" />
         <activity
-            android:name=".ActivityMinhasReclamacoes"
+            android:name=".activities.ActivityMinhasReclamacoes"
             android:exported="true" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -25,19 +25,19 @@
         </intent-filter>
         </activity>
         <activity
-            android:name=".NovasReclamacoes"
+            android:name=".activities.NovasReclamacoes"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".activities.MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".EsqueciSenha"
+            android:name=".activities.EsqueciSenha"
             android:exported="false" />
         <activity
-            android:name=".ActivityRegistro"
+            android:name=".activities.ActivityRegistro"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true" />
     </application>
 

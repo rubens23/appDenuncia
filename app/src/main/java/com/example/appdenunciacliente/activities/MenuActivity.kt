@@ -1,9 +1,11 @@
-package com.example.appdenunciacliente
+package com.example.appdenunciacliente.activities
 
 import android.content.Intent
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.appdenunciacliente.R
+import com.example.appdenunciacliente.database.BancoController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_menu.*
@@ -13,17 +15,13 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        var user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
-        if(user != null){
-            var bd : BancoController = BancoController(this)
-            var id_usuario : String = user.uid
-            var cursor : Cursor = bd.getUsersLikedComplaints(id_usuario);
-            if(cursor != null){
+        getLoggedUserLikedComplaints()
 
-            }
+        botoesMenu()
 
-        }
+    }
 
+    private fun botoesMenu() {
         btn_novas_reclamacoes.setOnClickListener{
             startActivity(Intent(this, NovasReclamacoes::class.java))
         }
@@ -33,6 +31,13 @@ class MenuActivity : AppCompatActivity() {
         btn_reclamacoes_comunidade.setOnClickListener {
             startActivity(Intent(this, ReclamacoesComunidade::class.java))
         }
+    }
 
+    private fun getLoggedUserLikedComplaints() {
+        val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
+        if(user != null){
+            val bd : BancoController = BancoController(this)
+            val cursor : Cursor = bd.getUsersLikedComplaints(user.uid);
+        }
     }
 }

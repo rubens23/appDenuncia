@@ -7,18 +7,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appdenunciacliente.BancoController;
-import com.example.appdenunciacliente.ComentariosModel;
+import com.example.appdenunciacliente.database.BancoController;
+import com.example.appdenunciacliente.models.ComentariosModel;
 import com.example.appdenunciacliente.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ComentariosViewHolder extends RecyclerView.ViewHolder {
 
-    TextView comentario;
-    BancoController bd;
-    Context ctx;
-    FirebaseUser user;
+    private TextView comentario;
+    private BancoController bd;
+    private Context ctx;
+    private FirebaseUser user;
 
     public ComentariosViewHolder(@NonNull View itemView) {
         super(itemView);

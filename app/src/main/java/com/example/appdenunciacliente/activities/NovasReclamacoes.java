@@ -1,4 +1,4 @@
-package com.example.appdenunciacliente;
+package com.example.appdenunciacliente.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,36 +13,54 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appdenunciacliente.R;
+import com.example.appdenunciacliente.database.BancoController;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class NovasReclamacoes extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText outroTipo, caixa_reclamacao;
-    String spinnerResult;
+    private EditText outroTipo, caixa_reclamacao;
+    private String spinnerResult;
+    private Spinner spinner;
+    private Button btn_enviar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novas_reclamacoes);
 
-        Spinner spinner = findViewById(R.id.spinner_tipos_reclamacao);
-        caixa_reclamacao = findViewById(R.id.reclamacao_cliente);
-        Button btn_enviar = findViewById(R.id.btn_enviar_reclamacao);
-        outroTipo = findViewById(R.id.edit_text_outro);
+        initClassMembers();
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        setSpinnerSettings();
+
+        apertarBotaoEnviarReclamacao();
+    }
+
+    private void initClassMembers() {
+        spinner = findViewById(R.id.spinner_tipos_reclamacao);
+        caixa_reclamacao = findViewById(R.id.reclamacao_cliente);
+        btn_enviar = findViewById(R.id.btn_enviar_reclamacao);
+        outroTipo = findViewById(R.id.edit_text_outro);
+    }
+
+    private void setSpinnerSettings() {
+        ArrayAdapter<CharSequence> adapterSpinner = ArrayAdapter.createFromResource(this,
                 R.array.tiposReclamacao, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterSpinner);
 
         spinner.setOnItemSelectedListener(this);
+    }
 
+
+    private void apertarBotaoEnviarReclamacao() {
         btn_enviar.setOnClickListener(v->{
             enviarReclamacao();
 
         });
     }
+
 
     private void enviarReclamacao() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,7 +100,6 @@ public class NovasReclamacoes extends AppCompatActivity implements AdapterView.O
             outroTipo.setVisibility(View.VISIBLE);
 
         }
-
 
 
     }
