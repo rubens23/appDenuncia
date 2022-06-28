@@ -1,5 +1,6 @@
 package com.example.appdenunciacliente.activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,9 +14,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.appdenunciacliente.Adapters.MinhasReclamacoesAdapter;
+import com.example.appdenunciacliente.ViewHolders.MinhaReclamacaoViewHolder;
 import com.example.appdenunciacliente.models.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
 import com.example.appdenunciacliente.database.BancoController;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ActivityMinhasReclamacoes extends AppCompatActivity {
+public class ActivityMinhasReclamacoes extends AppCompatActivity implements MinhaReclamacaoViewHolder.OnPictureTakenPassViewHolderData {
 
     private final int PICK_IMAGE_REQUEST = 2;
     private Uri fileUriPathForFirebaseStorage;
@@ -42,6 +45,10 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
     private List<Minha_Reclamacao> listaReclamacoesDoUserLogado = new ArrayList<>();
     private MinhasReclamacoesAdapter adapterMinhasReclamacoes;
     private RecyclerView recyclerViewReclamacoes;
+
+    private String id_reclamacao_foto_atual;
+    private String link_imagem_adicionada;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +101,6 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
         && resultCode == RESULT_OK
         && data != null
         && data.getData() != null){
-            boolean tem = data.hasExtra("enviar");
-            Bundle extras = data.getExtras();
-            Log.d("extra", "getExtras: "+tem);
             fileUriPathForFirebaseStorage = data.getData();
             uploadImageToFirebaseStorage(fileUriPathForFirebaseStorage);
 
@@ -110,13 +114,43 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
         firebaseStorageReference.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(ActivityMinhasReclamacoes.this, "imagem salva com sucesso!", Toast.LENGTH_SHORT).show();
-                saveImageDataToDatabase();
+                //colocar uma progressbar aqui depois
+                Log.d("uploadfeito", "imagem salva no firebase");
+                getRecentlyTakenImageDownloadLink(firebaseStorageReference);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("falhanoupload", "ocorreu uma falha no salvamento da imagem");
+
             }
         });
     }
 
+    private void getRecentlyTakenImageDownloadLink(StorageReference firebaseStorageReference) {
+        firebaseStorageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                link_imagem_adicionada = uri.toString();
+                Log.d("linkimagem", ""+link_imagem_adicionada);
+                saveImageDataToDatabase();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("falhalink", "falha ao pegar o link de download da imagem");
+            }
+        });
+
+    }
+
     private void saveImageDataToDatabase() {
+        if(id_reclamacao_foto_atual != null && link_imagem_adicionada != null){
+            Log.d("salvarnodb", "to pronto para salvar no database");
+            bd.inserirNaTabelaImagens(id_reclamacao_foto_atual, FirebaseAuth.getInstance().getUid(), link_imagem_adicionada);
+        }
 
 
     }
@@ -152,5 +186,10 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPictureTakenPassViewHolderData(Intent intent) {
+        Log.e("datacallback", intent.getStringExtra("id_reclamacao"));
+        id_reclamacao_foto_atual = intent.getStringExtra("id_reclamacao");
+    }
 }
 

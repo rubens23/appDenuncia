@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +26,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
-import java.util.UUID;
 
 //TODO colocar o onclick do botao de abrir para comentar.
 
@@ -43,12 +41,24 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
     private BancoController bd;
     private Uri filePath;
 
+    private OnPictureTakenPassViewHolderData onCardInfoListener;
+
+
+
     private final int PICK_IMAGE_REQUEST = 2;//eu coloquei qualquer valor aqui deliberadamente
 
     public MinhaReclamacaoViewHolder(@NonNull View itemView){
         super(itemView);
 
+
         initViewHolderItems();
+        try{
+            this.onCardInfoListener = ((OnPictureTakenPassViewHolderData) ctx);
+        }catch(ClassCastException e){
+            throw new ClassCastException(e.getMessage());
+        }
+
+
 
 
     }
@@ -67,7 +77,9 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
         heart_btn = itemView.findViewById(R.id.img_view_like);
         user = FirebaseAuth.getInstance().getCurrentUser();
         bd = new BancoController(ctx);
+
     }
+
 
 
     public void bindData(Minha_Reclamacao mr, Uri pathUri){
@@ -82,7 +94,7 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
                 }
             }
             btn_newImage.setOnClickListener(v->{
-                selectImage(mr.getReclamacao());
+                selectImage(mr.getCodigo_reclamacao());
             });
         }
 
@@ -123,12 +135,12 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    private void selectImage(String denuncia){
+    private void selectImage(String id_reclamacao){
         Intent intent = new Intent();
-        intent.putExtra("enviar", "alguma coisa");
-        Log.d("select", "denuncia: "+denuncia);
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.putExtra("id_reclamacao", id_reclamacao);
+        onCardInfoListener.onPictureTakenPassViewHolderData(intent);
         ((Activity)ctx).startActivityForResult(intent, PICK_IMAGE_REQUEST);
 
     }
@@ -164,6 +176,11 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
                 cont_likes.setText(qtdLikes);
             }while(cursor.moveToNext());
         }
+    }
+
+    public interface OnPictureTakenPassViewHolderData {
+        public void onPictureTakenPassViewHolderData(Intent intent);
+
     }
 
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.appdenunciacliente.models.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
 import com.example.appdenunciacliente.ViewHolders.MinhaReclamacaoViewHolder;
@@ -20,6 +21,8 @@ public class MinhasReclamacoesAdapter extends RecyclerView.Adapter<MinhaReclamac
     private List<Minha_Reclamacao> lista = new ArrayList<Minha_Reclamacao>();
     private Context context;
     private Uri filepath;
+
+
 
     public MinhasReclamacoesAdapter(Context ctx){
         this.context = ctx;
