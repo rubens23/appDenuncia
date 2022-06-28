@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.appdenunciacliente.Adapters.MinhasReclamacoesAdapter;
@@ -93,25 +94,31 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity {
         && resultCode == RESULT_OK
         && data != null
         && data.getData() != null){
+            boolean tem = data.hasExtra("enviar");
+            Bundle extras = data.getExtras();
+            Log.d("extra", "getExtras: "+tem);
             fileUriPathForFirebaseStorage = data.getData();
-
-
-
-            //TODO DEnovo o problema da resposta assíncrona....será que eu já sei resolver isso?
+            uploadImageToFirebaseStorage(fileUriPathForFirebaseStorage);
 
         }
     }
 
-
-    private void uploadImageToFirebaseStorage() {
+//2022-06-27 23:55:40.721 2996-2996/com.example.appdenunciacliente D/extra: getExtras: Bundle[mParcelledData.dataSize=292]
+    private void uploadImageToFirebaseStorage(Uri photoUri) {
         String imageName = UUID.randomUUID().toString();
         StorageReference firebaseStorageReference = storageReference.child("images/"+ imageName);
-        firebaseStorageReference.putFile(fileUriPathForFirebaseStorage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        firebaseStorageReference.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(ActivityMinhasReclamacoes.this, "imagem salva com sucesso!", Toast.LENGTH_SHORT).show();
+                saveImageDataToDatabase();
             }
         });
+    }
+
+    private void saveImageDataToDatabase() {
+
+
     }
 
     public List<Minha_Reclamacao> getDadosReclamacaoUsuario(){

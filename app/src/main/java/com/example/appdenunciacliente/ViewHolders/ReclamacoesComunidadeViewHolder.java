@@ -30,6 +30,13 @@ public class ReclamacoesComunidadeViewHolder extends RecyclerView.ViewHolder{
     public ReclamacoesComunidadeViewHolder(@NonNull View itemView) {
         super(itemView);
 
+        initClassMembers();
+
+
+    }
+
+    private void initClassMembers() {
+
         ctx = itemView.getContext();
         user = FirebaseAuth.getInstance().getCurrentUser();
         bd = new BancoController(ctx);
@@ -38,10 +45,9 @@ public class ReclamacoesComunidadeViewHolder extends RecyclerView.ViewHolder{
         tvStatus = itemView.findViewById(R.id.tv_status);
         heart_btn = itemView.findViewById(R.id.img_view_like);
         cont_likes = itemView.findViewById(R.id.contador_likes);
-        recl_comentario = itemView.findViewById(R.id.comentario_reclamcao_principal);
+        recl_comentario = itemView.findViewById(R.id.denunciaQueEstaSendoComentada);
         btn_comentario1 = itemView.findViewById(R.id.btn_comentarios1);
         btn_comentario2 = itemView.findViewById(R.id.btn_comentario2);
-
     }
 
     public void bindData(Minha_Reclamacao mr) {

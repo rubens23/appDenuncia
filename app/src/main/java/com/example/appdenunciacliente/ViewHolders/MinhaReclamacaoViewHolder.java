@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -81,13 +82,7 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
                 }
             }
             btn_newImage.setOnClickListener(v->{
-                selectImage();
-                uploadImage2();
-                //aqui eu posso implementar a intent para o usuario escolher a imagem
-
-                //aqui eu posso usar um método para pegar o id da reclamação associado a essa reclamacao que o usuario acabou de clicar
-                //aí fica a pergunta: qual método eu utilizo?
-
+                selectImage(mr.getReclamacao());
             });
         }
 
@@ -128,25 +123,16 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    private void selectImage(){
+    private void selectImage(String denuncia){
         Intent intent = new Intent();
+        intent.putExtra("enviar", "alguma coisa");
+        Log.d("select", "denuncia: "+denuncia);
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        ((Activity)ctx).startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem para a sua denúncia"), PICK_IMAGE_REQUEST);
+        ((Activity)ctx).startActivityForResult(intent, PICK_IMAGE_REQUEST);
 
     }
 
-    public void uploadImage2(){
-        StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
-        Toast.makeText(ctx, ""+filePath, Toast.LENGTH_SHORT).show();
-        //ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-       //     @Override
-        //    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-        //        String id_user = user.getUid();
-        //        Toast.makeText(ctx, "Imagem salva com sucesso", Toast.LENGTH_SHORT).show();
-        //    }
-    //    });
-    }
 
 
 
