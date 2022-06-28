@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -77,12 +78,13 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
         heart_btn = itemView.findViewById(R.id.img_view_like);
         user = FirebaseAuth.getInstance().getCurrentUser();
         bd = new BancoController(ctx);
-
     }
 
 
 
     public void bindData(Minha_Reclamacao mr, Uri pathUri){
+        seeIfTheresAPhotoForThisComplaint(mr);
+        /*
         filePath = pathUri;
         if(user != null){
             if(filePath != null){
@@ -97,6 +99,8 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
                 selectImage(mr.getCodigo_reclamacao());
             });
         }
+
+         */
 
 
         putComplaintsInRecyclerView(mr);
@@ -132,6 +136,18 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
                     }
                 }
             });
+        }
+    }
+
+    private void seeIfTheresAPhotoForThisComplaint(Minha_Reclamacao mr) {
+        //pega o id da reclamacao, se o campo de foto não for null
+        //pega o link e coloca no item atual
+        Cursor cursor;
+        cursor = bd.getComplaintImage(mr.getCodigo_reclamacao());
+        if(cursor != null){
+            cursor.moveToFirst();
+            String link_imagem = cursor.getString(0);
+            Picasso.get().load(link_imagem).into(imagem_reclamacao);
         }
     }
 

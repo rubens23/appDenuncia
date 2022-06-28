@@ -132,6 +132,19 @@ public class BancoController {
 
     }
 
+    public Cursor getComplaintImage(String id_reclamacao){
+        Cursor cursor;
+        db = banco.getReadableDatabase();
+        String[] campoSelecionado = {"link_imagem"};
+        String where = "id_reclamacao='"+id_reclamacao+"'";
+        cursor = db.query("imagens_denuncias", campoSelecionado, where, null, null, null, null, null);
+        if(cursor != null){
+            cursor.moveToNext();
+            return cursor;
+        }
+        return null;
+    }
+
     public String subtractOneLike(String codigo){
         BancoController bd = new BancoController(ctx);
         Cursor c = bd.getQuantidadeLikes(codigo);

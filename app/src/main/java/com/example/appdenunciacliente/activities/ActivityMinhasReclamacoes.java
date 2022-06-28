@@ -54,12 +54,20 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_minhas_reclamacoes);
+        Log.d("ciclo1", "to no oncreate");
 
         initClassMembers();
 
         mandarReclamacoesDoUsuarioParaAdapter();
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("ciclo2", "to no onStart");
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -150,6 +158,8 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         if(id_reclamacao_foto_atual != null && link_imagem_adicionada != null){
             Log.d("salvarnodb", "to pronto para salvar no database");
             bd.inserirNaTabelaImagens(id_reclamacao_foto_atual, FirebaseAuth.getInstance().getUid(), link_imagem_adicionada);
+            finish();
+            startActivity(getIntent());
         }
 
 
