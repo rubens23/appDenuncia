@@ -2,6 +2,7 @@ package com.example.appdenunciacliente.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,8 @@ public class MinhasReclamacoesAdapter extends RecyclerView.Adapter<MinhaReclamac
     @Override
     public void onBindViewHolder(@NonNull MinhaReclamacaoViewHolder holder, int position) {
         Minha_Reclamacao mr = lista.get(position);//aqui ele pega um objeto e manda para esse onBindViewHolder
-        holder.bindData(mr, filepath);
+        Log.d("listposition", ""+mr.getCodigo_reclamacao()+" "+mr.getReclamacao());
+        holder.bindData(mr);
 
 
 

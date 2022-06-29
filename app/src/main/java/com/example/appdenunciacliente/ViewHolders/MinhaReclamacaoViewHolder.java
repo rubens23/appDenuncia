@@ -27,6 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 //TODO colocar o onclick do botao de abrir para comentar.
 
@@ -41,6 +42,7 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
     private StorageReference storageReference;
     private BancoController bd;
     private Uri filePath;
+    private int contador = 0;
 
     private OnPictureTakenPassViewHolderData onCardInfoListener;
 
@@ -82,25 +84,21 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
 
 
 
-    public void bindData(Minha_Reclamacao mr, Uri pathUri){
-        seeIfTheresAPhotoForThisComplaint(mr);
-        /*
-        filePath = pathUri;
+    public void bindData(Minha_Reclamacao mr){
+        Log.d("contador", ""+contador);
+        Cursor cursorTemImagens;
+        cursorTemImagens = bd.getComplaintImage(mr.getCodigo_reclamacao());
+        if(cursorTemImagens.getCount()>0){
+            putPhotoInComplaint(mr, cursorTemImagens);
+        }
+
         if(user != null){
-            if(filePath != null){
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(ctx.getContentResolver(), filePath);
-                    imagem_reclamacao.setImageBitmap(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
             btn_newImage.setOnClickListener(v->{
                 selectImage(mr.getCodigo_reclamacao());
             });
         }
 
-         */
+
 
 
         putComplaintsInRecyclerView(mr);
@@ -137,18 +135,13 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
                 }
             });
         }
+        contador++;
     }
 
-    private void seeIfTheresAPhotoForThisComplaint(Minha_Reclamacao mr) {
-        //pega o id da reclamacao, se o campo de foto não for null
-        //pega o link e coloca no item atual
-        Cursor cursor;
-        cursor = bd.getComplaintImage(mr.getCodigo_reclamacao());
-        if(cursor != null){
-            cursor.moveToFirst();
-            String link_imagem = cursor.getString(0);
-            Picasso.get().load(link_imagem).into(imagem_reclamacao);
-        }
+    private void putPhotoInComplaint(Minha_Reclamacao mr, Cursor c) {
+        Log.d("iditembinddata", ""+mr.getCodigo_reclamacao()+c.getString(0));
+        Picasso.get().load(c.getString(0)).into(imagem_reclamacao);
+
     }
 
     private void selectImage(String id_reclamacao){
@@ -195,8 +188,10 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
     }
 
     public interface OnPictureTakenPassViewHolderData {
-        public void onPictureTakenPassViewHolderData(Intent intent);
+        void onPictureTakenPassViewHolderData(Intent intent);
 
     }
 
 }
+
+//ler no stackoverflow: RecyclerView causes issue when recycling

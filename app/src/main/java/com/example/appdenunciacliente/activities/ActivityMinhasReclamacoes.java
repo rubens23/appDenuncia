@@ -158,8 +158,6 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         if(id_reclamacao_foto_atual != null && link_imagem_adicionada != null){
             Log.d("salvarnodb", "to pronto para salvar no database");
             bd.inserirNaTabelaImagens(id_reclamacao_foto_atual, FirebaseAuth.getInstance().getUid(), link_imagem_adicionada);
-            finish();
-            startActivity(getIntent());
         }
 
 
