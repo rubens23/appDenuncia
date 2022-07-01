@@ -26,12 +26,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.util.Arrays;
 
 //TODO colocar o onclick do botao de abrir para comentar.
-
+/*
 public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
+
+
     private TextView text_view_reclamacao, text_view_label_status,
             text_view_status, cont_likes;
     private ImageView heart_btn, imagem_reclamacao;
@@ -44,11 +48,7 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
     private Uri filePath;
     private int contador = 0;
 
-    private OnPictureTakenPassViewHolderData onCardInfoListener;
-
-
-
-    private final int PICK_IMAGE_REQUEST = 2;//eu coloquei qualquer valor aqui deliberadamente
+    //eu coloquei qualquer valor aqui deliberadamente
 
     public MinhaReclamacaoViewHolder(@NonNull View itemView){
         super(itemView);
@@ -187,11 +187,14 @@ public class MinhaReclamacaoViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+
     public interface OnPictureTakenPassViewHolderData {
         void onPictureTakenPassViewHolderData(Intent intent);
 
     }
 
 }
+
+ */
 
 //ler no stackoverflow: RecyclerView causes issue when recycling

@@ -1,11 +1,12 @@
 package com.example.appdenunciacliente.Adapters;
-
+/*
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,9 @@ public class MinhasReclamacoesAdapter extends RecyclerView.Adapter<MinhaReclamac
         Minha_Reclamacao mr = lista.get(position);//aqui ele pega um objeto e manda para esse onBindViewHolder
         Log.d("listposition", ""+mr.getCodigo_reclamacao()+" "+mr.getReclamacao());
         holder.bindData(mr);
+        ImageView img = holder.itemView.findViewById(R.id.imagem_reclamacao);
+
+
 
 
 
@@ -60,3 +64,5 @@ public class MinhasReclamacoesAdapter extends RecyclerView.Adapter<MinhaReclamac
 
 
 }
+
+ */

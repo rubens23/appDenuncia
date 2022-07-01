@@ -13,13 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.appdenunciacliente.Adapters.MinhasReclamacoesAdapter;
-import com.example.appdenunciacliente.ViewHolders.MinhaReclamacaoViewHolder;
+
+import com.example.appdenunciacliente.Adapters.MinhasReclamacoesAdapterKotlin;
 import com.example.appdenunciacliente.models.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
 import com.example.appdenunciacliente.database.BancoController;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ActivityMinhasReclamacoes extends AppCompatActivity implements MinhaReclamacaoViewHolder.OnPictureTakenPassViewHolderData {
+public class ActivityMinhasReclamacoes extends AppCompatActivity implements MinhasReclamacoesAdapterKotlin.CallbackInterface{
 
     private final int PICK_IMAGE_REQUEST = 2;
     private Uri fileUriPathForFirebaseStorage;
@@ -43,11 +44,13 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
 
     private String user_id;
     private List<Minha_Reclamacao> listaReclamacoesDoUserLogado = new ArrayList<>();
-    private MinhasReclamacoesAdapter adapterMinhasReclamacoes;
+    private MinhasReclamacoesAdapterKotlin adapterMinhasReclamacoes;
     private RecyclerView recyclerViewReclamacoes;
 
     private String id_reclamacao_foto_atual;
     private String link_imagem_adicionada;
+    private FloatingActionButton addImageButton;
+    private MinhasReclamacoesAdapterKotlin.CallbackInterface callbackInterface;
 
 
     @Override
@@ -59,6 +62,8 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         initClassMembers();
 
         mandarReclamacoesDoUsuarioParaAdapter();
+
+
 
     }
 
@@ -89,18 +94,24 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        this.callbackInterface = ((MinhasReclamacoesAdapterKotlin.CallbackInterface) this);
+
         recyclerViewReclamacoes = findViewById(R.id.recycler_minhas_reclamacoes);
 
 
         LinearLayoutManager lm = new LinearLayoutManager(this);
         recyclerViewReclamacoes.setLayoutManager(lm);
-        adapterMinhasReclamacoes = new MinhasReclamacoesAdapter(this);
+        adapterMinhasReclamacoes = new MinhasReclamacoesAdapterKotlin(callbackInterface, this);
         recyclerViewReclamacoes.setAdapter(adapterMinhasReclamacoes);
+
+        //todo como lidar com botoes nos itens da recycler view??
 
         listaReclamacoes = new ArrayList();
 
         bd = new BancoController(this);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -193,11 +204,19 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         return listaReclamacoesDoUserLogado;
     }
 
+    @Override
+    public void passResultCallback(@NonNull Intent intent) {
+        id_reclamacao_foto_atual = intent.getStringExtra("id_reclamacao");
+    }
 
+
+    /*
     @Override
     public void onPictureTakenPassViewHolderData(Intent intent) {
         Log.e("datacallback", intent.getStringExtra("id_reclamacao"));
         id_reclamacao_foto_atual = intent.getStringExtra("id_reclamacao");
     }
+
+     */
 }
 
