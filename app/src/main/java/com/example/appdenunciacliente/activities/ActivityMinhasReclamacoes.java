@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseArray;
 import android.widget.Toast;
 
 
@@ -51,6 +52,8 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
     private String link_imagem_adicionada;
     private FloatingActionButton addImageButton;
     private MinhasReclamacoesAdapterKotlin.CallbackInterface callbackInterface;
+
+    private SparseArray imagesStateArray;
 
 
     @Override
@@ -109,6 +112,8 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         listaReclamacoes = new ArrayList();
 
         bd = new BancoController(this);
+
+        imagesStateArray = new SparseArray<String>();
     }
 
 
@@ -169,9 +174,21 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         if(id_reclamacao_foto_atual != null && link_imagem_adicionada != null){
             Log.d("salvarnodb", "to pronto para salvar no database");
             bd.inserirNaTabelaImagens(id_reclamacao_foto_atual, FirebaseAuth.getInstance().getUid(), link_imagem_adicionada);
+            Log.i("rubens", "o estado da imageView mudou");
+            imagesStateArray.put(Integer.parseInt(id_reclamacao_foto_atual), link_imagem_adicionada);
+            iterateThroughSparseArray();
         }
 
 
+    }
+
+    private void iterateThroughSparseArray() {
+        for(int i = 0; i < imagesStateArray.size(); i++){
+            int key = imagesStateArray.keyAt(i);
+            String urlImagemEscolhida = (String) imagesStateArray.get(key);
+            Log.d("testeSparseArray", "chave: "+key+" url: "+urlImagemEscolhida);
+
+        }
     }
 
     public List<Minha_Reclamacao> getDadosReclamacaoUsuario(){

@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.support.annotation.NonNull
 import android.util.Log
+import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
 
 
 
+
     override fun onCreateViewHolder (parent: ViewGroup, viewType: Int): MinhaReclamacaoViewHolder {
         return MinhaReclamacaoViewHolder(
             ItemMinhaReclamacaoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -53,6 +55,7 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
                 Log.d("listposition", ""+mr.getCodigo_reclamacao()+" "+mr.getReclamacao())
                 holder.bind(mr)
                 val img : ImageView = holder.itemView.findViewById(R.id.imagem_reclamacao)
+
             }
         }
 
@@ -61,6 +64,14 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
 
     override fun getItemCount(): Int {
         return lista.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     interface OnPictureTakenPassViewHolderData {
@@ -105,12 +116,21 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
 
             initViewHolderItems()
             onClickEvents(mr.codigo_reclamacao)
+            //eu tenho que de algum jeito ver se esse id de reclamacao tem um
+            //link de imagem
+            val temLinkImagem: Cursor = bd.getComplaintImage(mr.codigo_reclamacao)
+            if(temLinkImagem == null){
+                itemView.imagem_reclamacao.setImageResource(R.drawable.ic_launcher_background)
+
+            }
+
+
 
 
             Log.d("contador", ""+contador);
             val cursorTemImagens : Cursor = bd.getComplaintImage(mr.codigo_reclamacao)
             if(cursorTemImagens.count >0){
-                putPhotoInComplaint(mr, cursorTemImagens);
+                putPhotoInComplaint(mr, cursorTemImagens)
             }
 
 

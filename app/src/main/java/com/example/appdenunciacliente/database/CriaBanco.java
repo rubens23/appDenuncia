@@ -13,7 +13,7 @@ public class CriaBanco extends SQLiteOpenHelper {
     String numVersaoAntiga;
 
     private static final String NOME_BANCO = "bancoAppDenunciasCliente.db";
-    private static final int VERSAO = 22;
+    private static final int VERSAO = 23;
     Context ctx;
 
     public CriaBanco(Context context) {
