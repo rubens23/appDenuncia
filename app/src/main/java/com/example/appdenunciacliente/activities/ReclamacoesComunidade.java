@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.appdenunciacliente.Adapters.ReclamacoesComunidadeAdapter;
 import com.example.appdenunciacliente.R;
@@ -24,15 +28,33 @@ public class ReclamacoesComunidade extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private final int CONT = 1;
 
+    private TextView label_reclamacoes_comunidade;
+
+    private ImageView backButton3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reclamacoes_comunidade);
 
         initClassMembers();
+        onClickListeners();
+        configFonts();
 
         getAllComplaintsSentByEveryoneAndSendItToAdapter();
 
+    }
+
+    private void configFonts() {
+        Typeface tfLight = Typeface.createFromAsset(getAssets(), "fonts/Lato-Light.ttf");
+        Typeface tfHairline = Typeface.createFromAsset(getAssets(), "fonts/Lato-Hairline.ttf");
+        label_reclamacoes_comunidade.setTypeface(tfLight);
+    }
+
+    private void onClickListeners() {
+        backButton3.setOnClickListener(v->{
+            startActivity(new Intent(this, MenuActivity.class));
+        });
     }
 
 
@@ -42,6 +64,9 @@ public class ReclamacoesComunidade extends AppCompatActivity {
         adapterReclamacoesComunidade = new ReclamacoesComunidadeAdapter(this);
         recyclerView = findViewById(R.id.recycler_reclamacoes_comunidade);
         linearLayoutManager = new LinearLayoutManager(this);
+
+        backButton3 = findViewById(R.id.backButton3);
+        label_reclamacoes_comunidade = findViewById(R.id.lb_reclamacoes_comunidade);
     }
 
     private void getAllComplaintsSentByEveryoneAndSendItToAdapter() {

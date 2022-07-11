@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">appDenunciaCliente</string>
+    <string name="modelo_header_comentario">Os professores do brotero faltam muito, seria melhor para o nosso ensino se eles..</string>
+    <string name="txt_add_reclamacoes">Adicionar \nReclamações</string>
+    <string name="txt_minhas_reclamacoes">Minhas\nReclamações</string>
+    <string name="txt_reclamacoes_comunidade">Reclamações\nComunidade</string>
+    <string name="title_activity_nova_reclamacao">Adicionar Reclamação</string>
+    <string name="res_txt_tipo_reclamacao">Tipo da reclamação:</string>
+    <string name="res_hint_txt_reclamacao">Digite a sua reclamação</string>
+    <string name="res_label_minhas_reclamacoes">Minhas Reclamações</string>
     <string-array name="tiposReclamacao">
         <item>Educação</item>
         <item>Saneamento</item>

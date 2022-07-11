@@ -2,6 +2,7 @@ package com.example.appdenunciacliente.activities
 
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.appdenunciacliente.R
@@ -15,10 +16,21 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
+        configureFonts()
+
         getLoggedUserLikedComplaints()
 
         botoesMenu()
 
+
+
+    }
+
+    private fun configureFonts() {
+        val tf: Typeface = Typeface.createFromAsset(assets, "fonts/Lato-Hairline.ttf")
+        lb_title_adicionar_reclamacoes.setTypeface(tf, Typeface.BOLD)
+        lb_title_minhas_reclamacoes.setTypeface(tf, Typeface.BOLD)
+        lb_title_reclamacoes_comunidades.setTypeface(tf, Typeface.BOLD)
     }
 
     private fun botoesMenu() {

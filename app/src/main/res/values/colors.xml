@@ -7,11 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="verdeClaro">#21A826</color>
+    <color name="hintColor">#BDBDBD</color>
+    <color name="verdeClaro">#34EA3B</color>
     <color name="verdeEscuro">#367C3A</color>
     <color name="red">#C31313</color>
     <color name="altblack">#222222</color>
     <color name="altred">#20222222</color>
-    <color name="transparent">#4D37A09F</color>
+    <color name="transparent">#1937A09F</color>
+    <color name="spinnerBoxColor">#2E4241</color>
+    <color name="verdeClaroTransparent">#9934EA3B</color>
 
 </resources>

@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -34,6 +37,9 @@ import java.util.UUID;
 
 public class ActivityMinhasReclamacoes extends AppCompatActivity implements MinhasReclamacoesAdapterKotlin.CallbackInterface{
 
+    //todo consertar o erro: activity minhas reclamacoes fecha quando o user n tem nenhuma reclamacao cadastrada
+    //todo senha nao ta ficando com os asteriscos na activity registro
+    //todo cadfastro deu sucesso e depois falha
     private final int PICK_IMAGE_REQUEST = 2;
     private Uri fileUriPathForFirebaseStorage;
 
@@ -53,7 +59,10 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
     private FloatingActionButton addImageButton;
     private MinhasReclamacoesAdapterKotlin.CallbackInterface callbackInterface;
 
-    private SparseArray imagesStateArray;
+    private TextView label_minhas_reclamacoes;
+
+    private ImageView backButton;
+
 
 
     @Override
@@ -62,11 +71,29 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         setContentView(R.layout.activity_minhas_reclamacoes);
         Log.d("ciclo1", "to no oncreate");
 
+
         initClassMembers();
+
+        configFonts();
 
         mandarReclamacoesDoUsuarioParaAdapter();
 
+        onClickListeners();
 
+
+
+    }
+
+    private void onClickListeners() {
+        backButton.setOnClickListener(v->{
+            startActivity(new Intent(this, MenuActivity.class));
+        });
+    }
+
+    private void configFonts() {
+        Typeface tfLight = Typeface.createFromAsset(getAssets(), "fonts/Lato-Light.ttf");
+        Typeface tfHairline = Typeface.createFromAsset(getAssets(), "fonts/Lato-Hairline.ttf");
+        label_minhas_reclamacoes.setTypeface(tfLight);
 
     }
 
@@ -106,6 +133,9 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         recyclerViewReclamacoes.setLayoutManager(lm);
         adapterMinhasReclamacoes = new MinhasReclamacoesAdapterKotlin(callbackInterface, this);
         recyclerViewReclamacoes.setAdapter(adapterMinhasReclamacoes);
+        label_minhas_reclamacoes = findViewById(R.id.label_minhas_reclamacoes);
+
+        backButton = findViewById(R.id.backButton);
 
         //todo como lidar com botoes nos itens da recycler view??
 
@@ -113,7 +143,6 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
 
         bd = new BancoController(this);
 
-        imagesStateArray = new SparseArray<String>();
     }
 
 
@@ -175,21 +204,12 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
             Log.d("salvarnodb", "to pronto para salvar no database");
             bd.inserirNaTabelaImagens(id_reclamacao_foto_atual, FirebaseAuth.getInstance().getUid(), link_imagem_adicionada);
             Log.i("rubens", "o estado da imageView mudou");
-            imagesStateArray.put(Integer.parseInt(id_reclamacao_foto_atual), link_imagem_adicionada);
-            iterateThroughSparseArray();
+
         }
 
 
     }
 
-    private void iterateThroughSparseArray() {
-        for(int i = 0; i < imagesStateArray.size(); i++){
-            int key = imagesStateArray.keyAt(i);
-            String urlImagemEscolhida = (String) imagesStateArray.get(key);
-            Log.d("testeSparseArray", "chave: "+key+" url: "+urlImagemEscolhida);
-
-        }
-    }
 
     public List<Minha_Reclamacao> getDadosReclamacaoUsuario(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();//o view holder n ta funcionado 0.0//erro no cadastro de novos usuários
@@ -226,14 +246,5 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         id_reclamacao_foto_atual = intent.getStringExtra("id_reclamacao");
     }
 
-
-    /*
-    @Override
-    public void onPictureTakenPassViewHolderData(Intent intent) {
-        Log.e("datacallback", intent.getStringExtra("id_reclamacao"));
-        id_reclamacao_foto_atual = intent.getStringExtra("id_reclamacao");
-    }
-
-     */
 }
 

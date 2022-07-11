@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,11 +30,13 @@ public class ComentariosActivity extends AppCompatActivity {//TODO implementar o
     private EditText comentario;
     private Button btn_enviar_comentario;
     private FirebaseUser user;
-    private TextView recl_comentario;
+    private TextView recl_comentario, label_comentario;
     private RecyclerView recyclerView_comentarios;
     private List<ComentariosModel> listaComentarios;
     private ComentariosAdapter adapterComentarios;
     private String reclamacao, id_reclamacao;
+
+    private ImageView buttonBack4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,8 @@ public class ComentariosActivity extends AppCompatActivity {//TODO implementar o
         setContentView(R.layout.activity_comentarios);
 
         initClassMembers();
+        configFonts();
+        onClickListeners();
 
         manageComentariosRecyclerView();
 
@@ -53,6 +59,18 @@ public class ComentariosActivity extends AppCompatActivity {//TODO implementar o
 
     }
 
+    private void onClickListeners() {
+        buttonBack4.setOnClickListener(v->{
+            startActivity(new Intent(this, ReclamacoesComunidade.class));
+        });
+    }
+
+    private void configFonts() {
+        Typeface tfLight = Typeface.createFromAsset(getAssets(), "fonts/Lato-Light.ttf");
+        Typeface tfHairline = Typeface.createFromAsset(getAssets(), "fonts/Lato-Hairline.ttf");
+        label_comentario.setTypeface(tfLight);
+    }
+
     private void initClassMembers() {
         recl_comentario = findViewById(R.id.denunciaQueEstaSendoComentada);
 
@@ -62,6 +80,9 @@ public class ComentariosActivity extends AppCompatActivity {//TODO implementar o
         user = FirebaseAuth.getInstance().getCurrentUser();
         recyclerView_comentarios = findViewById(R.id.recycler_comentarios);
         listaComentarios = new ArrayList<>();
+
+        label_comentario = findViewById(R.id.label_comentarios);
+        buttonBack4 = findViewById(R.id.backButton4);
     }
 
     private void enviarComentarios() {
