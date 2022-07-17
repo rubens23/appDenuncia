@@ -3,20 +3,22 @@ package com.example.appdenunciacliente.ViewHolders;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appdenunciacliente.BancoController;
-import com.example.appdenunciacliente.ComentariosActivity;
-import com.example.appdenunciacliente.Minha_Reclamacao;
+import com.example.appdenunciacliente.database.BancoController;
+import com.example.appdenunciacliente.activities.ComentariosActivity;
+import com.example.appdenunciacliente.models.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 //TODO colocar o onclick do botao de abrir para comentar.
 
@@ -26,10 +28,18 @@ public class ReclamacoesComunidadeViewHolder extends RecyclerView.ViewHolder{
     TextView tvReclamacao, tvStatus, cont_likes, recl_comentario, btn_comentario2;
     FirebaseUser user;
     BancoController bd;
-    ImageView heart_btn, btn_comentario1;
+    ImageView heart_btn, btn_comentario1, imagem_reclamacao;
+    FloatingActionButton btnNewImage;
 
     public ReclamacoesComunidadeViewHolder(@NonNull View itemView) {
         super(itemView);
+
+        initClassMembers();
+
+
+    }
+
+    private void initClassMembers() {
 
         ctx = itemView.getContext();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -39,13 +49,16 @@ public class ReclamacoesComunidadeViewHolder extends RecyclerView.ViewHolder{
         tvStatus = itemView.findViewById(R.id.tv_status);
         heart_btn = itemView.findViewById(R.id.img_view_like);
         cont_likes = itemView.findViewById(R.id.contador_likes);
-        recl_comentario = itemView.findViewById(R.id.comentario_reclamcao_principal);
+        recl_comentario = itemView.findViewById(R.id.denunciaQueEstaSendoComentada);
         btn_comentario1 = itemView.findViewById(R.id.btn_comentarios1);
         btn_comentario2 = itemView.findViewById(R.id.btn_comentario2);
-
+        imagem_reclamacao = itemView.findViewById(R.id.imagem_reclamacao);
+        btnNewImage = itemView.findViewById(R.id.btn_newImage);
+        btnNewImage.setVisibility(View.INVISIBLE);
     }
 
     public void bindData(Minha_Reclamacao mr) {
+        dealWithComplaintImages(mr);
         putComplaintsInRecyclerView(mr);
         verifyIfUserAlreadyLikedSpecificComplaint(mr);
         setLikesCounter(mr);
@@ -111,6 +124,24 @@ public class ReclamacoesComunidadeViewHolder extends RecyclerView.ViewHolder{
         }
 
     }
+
+    private void dealWithComplaintImages(Minha_Reclamacao mr) {
+        Cursor temLinkImagem = bd.getComplaintImage(mr.getCodigo_reclamacao());
+        if(temLinkImagem == null){
+            imagem_reclamacao.setImageResource(R.drawable.ic_launcher_background);
+
+        }
+
+        Cursor cursorTemImagens = bd.getComplaintImage(mr.getCodigo_reclamacao());
+        if(cursorTemImagens.getCount() >0){
+            putPhotoInComplaint(mr, cursorTemImagens);
+        }
+    }
+
+    private void putPhotoInComplaint(Minha_Reclamacao mr, Cursor c) {
+        Picasso.get().load(c.getString(0)).into(imagem_reclamacao);
+    }
+
     public void putComplaintsInRecyclerView(Minha_Reclamacao mr){
         tvReclamacao.setText(mr.getReclamacao());
         tvStatus.setText(mr.getStatus());

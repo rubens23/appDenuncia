@@ -6,12 +6,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/background1"
     android:orientation="vertical"
-    tools:context=".ComentariosActivity">
+    tools:context=".activities.ComentariosActivity">
+
+    <ImageView
+        android:id="@+id/backButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:padding="20dp"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         app:cardCornerRadius="4dp"
         android:backgroundTint="@color/altblack"
         android:layout_marginStart="10dp"
@@ -25,20 +32,21 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/comentario_reclamcao_principal"
+                android:id="@+id/denunciaQueEstaSendoComentada"
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Os professores do brotero faltam muito, seria melhor para o nosso ensino se eles.."
+                android:text="@string/modelo_header_comentario"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
             <TextView
+                android:id="@+id/label_comentarios"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comentários:"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="40dp"
                 android:textColor="@color/verdeClaro"
                 android:textSize="24sp"/>
 
@@ -46,13 +54,16 @@
                 android:layout_marginTop="20dp"
                 android:id="@+id/recycler_comentarios"
                 android:layout_width="match_parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_comentario"
                 android:layout_height="match_parent"/>
 
             <EditText
                 android:id="@+id/caixa_comentarios"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/hintColor"
+                android:background="@color/transparent"
                 android:textColor="@color/white"
                 android:layout_marginTop="40dp"
                 android:hint="Escreva um comentário" />
@@ -61,7 +72,7 @@
                 android:id="@+id/btn_enviar_comentario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/verdeClaro"
+                android:backgroundTint="@color/verdeEscuro"
                 android:text="ENVIAR COMENTÁRIO"
                 android:textSize="20sp"
                 android:layout_marginBottom="20dp"/>

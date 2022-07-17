@@ -1,4 +1,4 @@
-package com.example.appdenunciacliente;
+package com.example.appdenunciacliente.models;
 
 public class ComentariosModel {
     String id_usuario;

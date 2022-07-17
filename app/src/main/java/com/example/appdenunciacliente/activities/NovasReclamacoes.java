@@ -1,48 +1,102 @@
-package com.example.appdenunciacliente;
+package com.example.appdenunciacliente.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appdenunciacliente.R;
+import com.example.appdenunciacliente.database.BancoController;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class NovasReclamacoes extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText outroTipo, caixa_reclamacao;
-    String spinnerResult;
+
+
+    private EditText outroTipo, caixa_reclamacao;
+    private String spinnerResult;
+    private Spinner spinner;
+    private Button btn_enviar;
+    private TextView title_activity, label_tipo_reclamacao;
+
+    private ImageView backButton2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novas_reclamacoes);
 
-        Spinner spinner = findViewById(R.id.spinner_tipos_reclamacao);
-        caixa_reclamacao = findViewById(R.id.reclamacao_cliente);
-        Button btn_enviar = findViewById(R.id.btn_enviar_reclamacao);
-        outroTipo = findViewById(R.id.edit_text_outro);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+
+        initClassMembers();
+
+        onClickListeners();
+
+        configFonts();
+
+        setSpinnerSettings();
+
+        apertarBotaoEnviarReclamacao();
+    }
+
+    private void onClickListeners() {
+        backButton2.setOnClickListener(v->{
+            startActivity(new Intent(this, MenuActivity.class));
+        });
+    }
+
+
+    private void configFonts() {
+        Typeface tfLight = Typeface.createFromAsset(getAssets(), "fonts/Lato-Light.ttf");
+        Typeface tfHairline = Typeface.createFromAsset(getAssets(), "fonts/Lato-Hairline.ttf");
+        title_activity.setTypeface(tfLight, Typeface.BOLD);
+        label_tipo_reclamacao.setTypeface(tfLight);
+
+
+
+
+    }
+
+    private void initClassMembers() {
+        spinner = findViewById(R.id.spinner_tipos_reclamacao);
+        caixa_reclamacao = findViewById(R.id.reclamacao_cliente);
+        btn_enviar = findViewById(R.id.btn_enviar_reclamacao);
+        outroTipo = findViewById(R.id.edit_text_outro);
+        title_activity = findViewById(R.id.title_activity_nova_reclamacao);
+        label_tipo_reclamacao = findViewById(R.id.label_tipo_reclamacao);
+        backButton2 = findViewById(R.id.backButton2);
+    }
+
+    private void setSpinnerSettings() {
+        ArrayAdapter<CharSequence> adapterSpinner = ArrayAdapter.createFromResource(this,
                 R.array.tiposReclamacao, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        adapterSpinner.setDropDownViewResource(R.layout.spinner_dropdown_layout);//simple_spinner_dropdown_item
+        spinner.setAdapter(adapterSpinner);
 
         spinner.setOnItemSelectedListener(this);
+    }
 
+
+    private void apertarBotaoEnviarReclamacao() {
         btn_enviar.setOnClickListener(v->{
             enviarReclamacao();
 
         });
     }
+
 
     private void enviarReclamacao() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -79,10 +133,12 @@ public class NovasReclamacoes extends AppCompatActivity implements AdapterView.O
             spinnerResult = item;
         }
         if(item.equals("outro")){
+            Log.d("outro", "cliquei no outro");
+            outroTipo.setText("");
+            spinner.setVisibility(View.GONE);
             outroTipo.setVisibility(View.VISIBLE);
 
         }
-
 
 
     }

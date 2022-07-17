@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appdenunciacliente.Minha_Reclamacao;
+import com.example.appdenunciacliente.models.Minha_Reclamacao;
 import com.example.appdenunciacliente.R;
 import com.example.appdenunciacliente.ViewHolders.ReclamacoesComunidadeViewHolder;
 
@@ -17,8 +17,8 @@ import java.util.List;
 
 public class ReclamacoesComunidadeAdapter extends RecyclerView.Adapter<ReclamacoesComunidadeViewHolder> {
 
-    Context contexto;
-    List<Minha_Reclamacao> listaTodasReclamacoes = new ArrayList<>();
+    private Context contexto;
+    private List<Minha_Reclamacao> listaTodasReclamacoes = new ArrayList<>();
 
     public ReclamacoesComunidadeAdapter(Context ctx){
         contexto = ctx;
@@ -44,5 +44,15 @@ public class ReclamacoesComunidadeAdapter extends RecyclerView.Adapter<Reclamaco
     @Override
     public int getItemCount() {
         return listaTodasReclamacoes.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return new Long(position);
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        return position;
     }
 }

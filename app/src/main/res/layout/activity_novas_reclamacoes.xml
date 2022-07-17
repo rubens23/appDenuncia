@@ -6,16 +6,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background1"
-    tools:context=".MenuActivity">
+    tools:context=".activities.MenuActivity">
+
+    <ImageView
+        android:id="@+id/backButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:padding="20dp"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/title_activity_nova_reclamacao"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar\nReclamação"
+        android:layout_gravity="center"
+        android:text="@string/title_activity_nova_reclamacao"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="34sp"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="20dp"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -32,38 +41,58 @@
             android:orientation="vertical">
 
         <TextView
+            android:id="@+id/label_tipo_reclamacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tipo da reclamação:"
+            android:text="@string/res_txt_tipo_reclamacao"
             android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:textColor="@color/verdeClaro"
             android:layout_marginBottom="4dp"
-            android:textSize="18sp"/>
+            android:textSize="24sp"/>
 
-        <Spinner
-            android:id="@+id/spinner_tipos_reclamacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
-
-            <EditText
-                android:id="@+id/edit_text_outro"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Digite o tipo da sua reclamação"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginEnd="10dp"
-                android:visibility="invisible"/>
+                android:background="@color/transparent">
+
+                <Spinner
+                    android:id="@+id/spinner_tipos_reclamacao"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="0dp"
+                    android:popupBackground="@color/spinnerBoxColor"
+                    android:layout_marginEnd="10dp"/>
+
+                <EditText
+                    android:id="@+id/edit_text_outro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Digite o tipo da sua reclamação"
+                    android:textColorHint="@color/hintColor"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="invisible"/>
+
+
+            </FrameLayout>
+
+
         <EditText
             android:id="@+id/reclamacao_cliente"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:hint="Digite a sua reclamação"
+            android:hint="@string/res_hint_txt_reclamacao"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/hintColor"
+            android:background="@color/transparent"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"/>
@@ -78,7 +107,7 @@
             android:textSize="20dp"
             android:textColor="@color/white"
             android:layout_marginBottom="5dp"
-            android:backgroundTint="@color/verdeClaro"
+            android:backgroundTint="@color/verdeEscuro"
             />
 
         </LinearLayout>

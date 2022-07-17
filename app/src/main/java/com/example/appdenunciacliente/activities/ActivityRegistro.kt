@@ -1,10 +1,10 @@
-package com.example.appdenunciacliente
+package com.example.appdenunciacliente.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import com.example.appdenunciacliente.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_registro.*
 
@@ -33,6 +33,7 @@ class ActivityRegistro : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener{
                 if(it.isSuccessful){
                     Toast.makeText(this, "cadastrado com sucesso", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, LoginActivity::class.java))
                 }else{
                     Toast.makeText(this, "falha no cadastro", Toast.LENGTH_LONG).show()
                 }

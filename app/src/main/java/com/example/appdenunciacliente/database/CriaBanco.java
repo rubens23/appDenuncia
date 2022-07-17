@@ -1,9 +1,10 @@
-package com.example.appdenunciacliente;
+package com.example.appdenunciacliente.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 //TODO CRIAR A TABELA QUE DEFINI NO PLANEJAMENTO
@@ -12,7 +13,7 @@ public class CriaBanco extends SQLiteOpenHelper {
     String numVersaoAntiga;
 
     private static final String NOME_BANCO = "bancoAppDenunciasCliente.db";
-    private static final int VERSAO = 12;
+    private static final int VERSAO = 24;
     Context ctx;
 
     public CriaBanco(Context context) {
@@ -68,7 +69,10 @@ public class CriaBanco extends SQLiteOpenHelper {
         }
 
          */
+
         if(newVersion > oldVersion){
+            Log.d("db", "passei pelo upload do database");
+            db.execSQL("DROP TABLE IF EXISTS imagens_denuncias");
             String sql5 = "CREATE TABLE imagens_denuncias("
                     +"id_reclamacao integer primary key," +
                     "user_id text,"
@@ -76,6 +80,7 @@ public class CriaBanco extends SQLiteOpenHelper {
 
             db.execSQL(sql5);
         }
+
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.appdenunciacliente;
+package com.example.appdenunciacliente.models;
 
 import androidx.recyclerview.widget.RecyclerView;
 

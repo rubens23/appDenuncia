@@ -6,16 +6,24 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/background1"
-    tools:context=".ActivityMinhasReclamacoes">
+    tools:context=".activities.ActivityMinhasReclamacoes">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:padding="20dp"/>
 
     <TextView
+        android:id="@+id/label_minhas_reclamacoes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Minhas Reclamações"
+        android:text="@string/res_label_minhas_reclamacoes"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textAlignment="center"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="20dp"/>
 
 
 
@@ -23,7 +31,8 @@
             android:layout_marginTop="40dp"
             android:id="@+id/recycler_minhas_reclamacoes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_minha_reclamacao"/>
 
 
 

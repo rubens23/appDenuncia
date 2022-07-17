@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appdenunciacliente.ComentariosModel;
+import com.example.appdenunciacliente.models.ComentariosModel;
 import com.example.appdenunciacliente.R;
 import com.example.appdenunciacliente.ViewHolders.ComentariosViewHolder;
 
@@ -17,8 +17,8 @@ import java.util.List;
 
 public class ComentariosAdapter extends RecyclerView.Adapter<ComentariosViewHolder> {
 
-    Context ctx;
-    List<ComentariosModel> listaComents = new ArrayList<>();
+    private Context ctx;
+    private List<ComentariosModel> listaComents = new ArrayList<>();
     public ComentariosAdapter(Context context){
         ctx = context;
     }
