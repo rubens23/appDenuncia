@@ -154,16 +154,21 @@ public class BancoController {
         db = banco.getReadableDatabase();
 
         ContentValues valores = new ContentValues();
-        valores.put("quantidade_likes", contador_likes - 1);
-        String condicao = "codigo_reclamacao = '"+codigo+"'";
+        if((contador_likes - 1) < 0){
+            return "a quantidade de likes já é zero";
+        }else {
+            valores.put("quantidade_likes", contador_likes - 1);
+            String condicao = "codigo_reclamacao = '"+codigo+"'";
 
-        int linha;
-        linha = db.update("denuncias", valores, condicao, null);
+            int linha;
+            linha = db.update("denuncias", valores, condicao, null);
 
-        if(linha < 1){
-            msg = "Erro ao retirar o Like";
+            if(linha < 1){
+                msg = "Erro ao retirar o Like";
+            }
+            return msg;
         }
-        return msg;
+
     }
 
     public Cursor getQuantidadeLikes(String codigo){

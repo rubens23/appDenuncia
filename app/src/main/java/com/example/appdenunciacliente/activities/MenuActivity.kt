@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.appdenunciacliente.R
 import com.example.appdenunciacliente.database.BancoController
 import com.google.firebase.auth.FirebaseAuth
@@ -51,5 +52,10 @@ class MenuActivity : AppCompatActivity() {
             val bd : BancoController = BancoController(this)
             val cursor : Cursor = bd.getUsersLikedComplaints(user.uid);
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("ciclo", "to no onDestroy da MenuActivity")
     }
 }

@@ -39,9 +39,9 @@
             android:layout_marginEnd="10dp"
             android:textColor="@color/white"
             android:layout_marginTop="40dp"
-            android:hint="informe seu e-mail para o cadastro"
+            android:hint="@string/hint_et_email_cadastrar"
             android:textColorHint="#9E9E9E"
-            android:textSize="16dp"
+            android:textSize="16sp"
             />
 
         <EditText
@@ -52,9 +52,10 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:hint="informe uma senha"
+            android:hint="@string/hint_et_senha_cadastrar"
+            android:inputType="textPassword"
             android:textColorHint="#9E9E9E"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnCadastro"

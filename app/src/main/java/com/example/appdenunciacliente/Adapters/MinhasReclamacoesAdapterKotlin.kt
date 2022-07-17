@@ -15,6 +15,7 @@ import android.widget.ImageView
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appdenunciacliente.R
+import com.example.appdenunciacliente.activities.ComentariosActivity
 import com.example.appdenunciacliente.database.BancoController
 import com.example.appdenunciacliente.databinding.ItemMinhaReclamacaoBinding
 import com.example.appdenunciacliente.models.Minha_Reclamacao
@@ -31,13 +32,6 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
     private var lista : MutableList<Minha_Reclamacao> = mutableListOf()
     private var context : Context = ctx
     private lateinit var filepath : Uri
-
-
-
-
-
-
-
 
 
     override fun onCreateViewHolder (parent: ViewGroup, viewType: Int): MinhaReclamacaoViewHolder {
@@ -133,17 +127,19 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
                 putPhotoInComplaint(mr, cursorTemImagens)
             }
 
+            commentButtons(mr)
 
 
-
-            putComplaintsInRecyclerView(mr);
-            verifyIfUserAlreadyLikedSpecificComplaint(mr);
-            setLikesCounter(mr);
+            putComplaintsInRecyclerView(mr)
+            verifyIfUserAlreadyLikedSpecificComplaint(mr)
+            setLikesCounter(mr)
+            setEmptyHeartIfCountIsZero(mr.codigo_reclamacao)
             if(user != null){
 
                 itemView.img_view_like.setOnClickListener{
                     val isThereALike: Cursor  = bd.seeIfUserLikedParticularComplaint(user.uid, mr.codigo_reclamacao)
                     if (isThereALike.count >0) {
+                        Log.d("likecount", ""+isThereALike.count)
                         itemView.img_view_like.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                         val resultMinusOneLike: String = bd.subtractOneLike(mr.codigo_reclamacao)
                         val codReclamacaoTirarLike : String = mr.codigo_reclamacao
@@ -173,6 +169,52 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
             contador++
 
         }
+
+        private fun setEmptyHeartIfCountIsZero(codigoReclamacao: String?) {
+            val c: Cursor = bd.getQuantidadeLikes(codigoReclamacao)
+            if(c.getString(0).toInt() == 0){
+                Log.d("ntemlikes", ""+c.getString(0))
+                itemView.img_view_like.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+
+            }
+
+        }
+
+
+        private fun commentButtons(mr: Minha_Reclamacao) {
+
+            itemView.btn_comentarios1.setOnClickListener{
+                val reclamacoesParaComentarios: Cursor = bd.carregaTodasReclamacoes()
+                val idReclamacao: String = mr.codigo_reclamacao
+                if(reclamacoesParaComentarios != null){
+                    do {
+                        if(reclamacoesParaComentarios.getString(2).equals(idReclamacao)){
+                            val openComentarios = Intent(ctx, ComentariosActivity::class.java)
+                            openComentarios.putExtra("message_key", mr.reclamacao)
+                            openComentarios.putExtra("id_reclamacao", mr.codigo_reclamacao)
+                            ctx.startActivity(openComentarios);
+                        }
+                    }while(reclamacoesParaComentarios.moveToNext())
+                }
+            }
+
+            itemView.btn_comentario2.setOnClickListener{
+                val reclamacoesParaComentarios: Cursor = bd.carregaTodasReclamacoes()
+                val idReclamacao: String = mr.codigo_reclamacao
+                if(reclamacoesParaComentarios != null){
+                    do {
+                        if(reclamacoesParaComentarios.getString(2).equals(idReclamacao)){
+                            val openComentarios = Intent(ctx, ComentariosActivity::class.java)
+                            openComentarios.putExtra("message_key", mr.reclamacao);
+                            openComentarios.putExtra("id_reclamacao", mr.codigo_reclamacao)
+                            ctx.startActivity(openComentarios);
+                        }
+                    }while(reclamacoesParaComentarios.moveToNext())
+                }
+            }
+
+        }
+
 
         fun initViewHolderItems() {
             storage = FirebaseStorage.getInstance();
@@ -215,6 +257,7 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
         fun setLikesCounter(mr: Minha_Reclamacao){
             val codReclamacao: String = mr.codigo_reclamacao
             val cursor: Cursor = bd.getQuantidadeLikes(codReclamacao)
+            Log.d("testecursor", ""+cursor.getString(0))
             if(cursor != null){
                 do{
                     val qtdLikes: String = cursor.getString(0)
@@ -248,10 +291,8 @@ constructor(private val callbackInterface: MinhasReclamacoesAdapterKotlin.Callba
     }
 
 
-
-
-
 }
+
 
 
 

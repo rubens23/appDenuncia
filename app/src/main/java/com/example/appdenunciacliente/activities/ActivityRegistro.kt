@@ -1,5 +1,6 @@
 package com.example.appdenunciacliente.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -32,6 +33,7 @@ class ActivityRegistro : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener{
                 if(it.isSuccessful){
                     Toast.makeText(this, "cadastrado com sucesso", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, LoginActivity::class.java))
                 }else{
                     Toast.makeText(this, "falha no cadastro", Toast.LENGTH_LONG).show()
                 }

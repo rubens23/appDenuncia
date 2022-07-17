@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComentariosActivity extends AppCompatActivity {//TODO implementar os comentarios na recycler view dessa activity.
+public class ComentariosActivity extends AppCompatActivity {
 
     private BancoController bd;
     private EditText comentario;
@@ -90,6 +90,8 @@ public class ComentariosActivity extends AppCompatActivity {//TODO implementar o
             String comentario_enviado = comentario.getText().toString();
             String enviar_comentario = bd.adicionarComentario(user.getUid(), comentario_enviado, id_reclamacao);
             Toast.makeText(this, enviar_comentario, Toast.LENGTH_SHORT).show();
+            comentario.setText("");
+            recreate();
         });
     }
 

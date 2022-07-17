@@ -25,8 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class NovasReclamacoes extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
-    //todo arrumar a edit text
-    //todo ta muito impessoal, adicionar foto do usuario e nome do user nos comments
 
     private EditText outroTipo, caixa_reclamacao;
     private String spinnerResult;

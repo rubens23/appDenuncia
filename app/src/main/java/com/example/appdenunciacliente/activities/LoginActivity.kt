@@ -3,6 +3,7 @@ package com.example.appdenunciacliente.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import com.example.appdenunciacliente.R
@@ -16,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
     }
 
     override fun onResume() {
@@ -56,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 if(task.isSuccessful){
                     startActivity(Intent(this, MenuActivity::class.java))
                 }else{
-                    Toast.makeText(this, "Erro ao fazer Login", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "E-mail e/ou senha errado(a)", Toast.LENGTH_LONG).show()
                 }
             }
         }

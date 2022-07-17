@@ -32,6 +32,9 @@ public class ReclamacoesComunidade extends AppCompatActivity {
 
     private ImageView backButton3;
 
+    //todo remover o botao de adicionar imagem a denuncia
+    //todo arrumar os likes da minha conta rubens@teste.com
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

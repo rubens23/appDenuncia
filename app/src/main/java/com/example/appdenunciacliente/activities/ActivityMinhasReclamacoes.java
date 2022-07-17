@@ -62,6 +62,8 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
     private TextView label_minhas_reclamacoes;
 
     private ImageView backButton;
+    
+    //todo arrumar o bug dos likes
 
 
 
@@ -97,11 +99,7 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("ciclo2", "to no onStart");
-    }
+
 
     @Override
     protected void onResume() {
@@ -188,6 +186,7 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
                 link_imagem_adicionada = uri.toString();
                 Log.d("linkimagem", ""+link_imagem_adicionada);
                 saveImageDataToDatabase();
+                recreate();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -223,8 +222,7 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
         Cursor retorno = bd.carregaDadoPeloUserId(user_id);
         int total_rows = retorno.getCount();
 
-        String total_linhas = Integer.toString(total_rows);
-        if (retorno != null) {
+        if (retorno != null && total_rows>0) {
             do{
                 Minha_Reclamacao mr = new Minha_Reclamacao();
                 mr.setReclamacao(retorno.getString(0));
@@ -232,11 +230,6 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
                 mr.setCodigo_reclamacao(retorno.getString(2));
                 listaReclamacoesDoUserLogado.add(mr);
             }while(retorno.moveToNext());
-
-
-
-        }else{
-            Toast.makeText(this, "o cursor está vazio", Toast.LENGTH_SHORT).show();
         }
         return listaReclamacoesDoUserLogado;
     }

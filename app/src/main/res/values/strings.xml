@@ -9,6 +9,12 @@
     <string name="res_txt_tipo_reclamacao">Tipo da reclamação:</string>
     <string name="res_hint_txt_reclamacao">Digite a sua reclamação</string>
     <string name="res_label_minhas_reclamacoes">Minhas Reclamações</string>
+    <string name="hint_et_senha_cadastrar">informe uma senha</string>
+    <string name="hint_et_email_cadastrar">informe seu e-mail para o cadastro</string>
+    <string name="et_email_login">E-mail</string>
+    <string name="et_senha_login">Senha</string>
+    <string name="et_email_password_reset">Digite o seu e-mail cadastrado</string>
+    <string name="btn_reset_password">RESETAR SENHA</string>
     <string-array name="tiposReclamacao">
         <item>Educação</item>
         <item>Saneamento</item>

@@ -45,4 +45,14 @@ public class ReclamacoesComunidadeAdapter extends RecyclerView.Adapter<Reclamaco
     public int getItemCount() {
         return listaTodasReclamacoes.size();
     }
+
+    @Override
+    public long getItemId(int position) {
+        return new Long(position);
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        return position;
+    }
 }
