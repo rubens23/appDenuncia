@@ -37,9 +37,6 @@ import java.util.UUID;
 
 public class ActivityMinhasReclamacoes extends AppCompatActivity implements MinhasReclamacoesAdapterKotlin.CallbackInterface{
 
-    //todo consertar o erro: activity minhas reclamacoes fecha quando o user n tem nenhuma reclamacao cadastrada
-    //todo senha nao ta ficando com os asteriscos na activity registro
-    //todo cadfastro deu sucesso e depois falha
     private final int PICK_IMAGE_REQUEST = 2;
     private Uri fileUriPathForFirebaseStorage;
 
