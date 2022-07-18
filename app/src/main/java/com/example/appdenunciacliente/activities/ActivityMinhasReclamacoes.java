@@ -60,7 +60,7 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
 
     private ImageView backButton;
     
-    //todo arrumar o bug dos likes
+ 
 
 
 
@@ -132,7 +132,7 @@ public class ActivityMinhasReclamacoes extends AppCompatActivity implements Minh
 
         backButton = findViewById(R.id.backButton);
 
-        //todo como lidar com botoes nos itens da recycler view??
+      
 
         listaReclamacoes = new ArrayList();
 
