@@ -1,51 +1,123 @@
-# appDenuncia
-appDenuncia.
 
-A ideia desse app partiu de um projeto que eu tive na faculdade. O escopo do projeto seria fazer duas aplicações, uma para desktop e outra para mobile.
-A aplicação para mobile focaria nas funcionalidades destinadas aos usuários que poderiam realizar denúncias de problemas que eles notaram em seu bairro ou cidade.
+<h1 align="center">App Denúncia</h1>
 
-O app conta com telas de login para autenticação dos usuários, uma tela de menu para facilitar a navegação dentro do aplicativo, uma tela para registro de novas
-denúncias, uma tela para visualizar as denúncias que você já fez e uma tela para visualizar as denúncias de outras pessoas que também usam o aplicativo.
+<p align="center">
+  <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
+  <a href="https://android-arsenal.com/api?level=21"><img src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat" border="0" alt="API"></a>
+  <br>
+  <a href="https://wa.me/+5511961422254"><img alt="WhatsApp" src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
+  <a href="https://www.linkedin.com/in/rubens-francisco-125529162/"><img alt="Linkedin" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
+  <a href="mailto:rubens_assis@outlook.com.br"><img alt="Outlook" src="https://img.shields.io/badge/Microsoft_Outlook-0078D4?style=for-the-badge&logo=microsoft-outlook&logoColor=white"/></a>
+</p>
 
-A ideia desse aplicativo é ser conectado com outra aplicação que será destinada a profissionais que administrarão e darão tratamento a essas denúncias.
+<p align="center">  
 
-A seguir segue print das telas do app junto com uma breve explicação de como ele foi feito:
+⭐ Esse é um projeto para demonstrar meu conhecimento técnico no desenvolvimento Android nativo com Kotlin. Mais informações técnicas abaixo.
 
+:exclamation: Aplicativo que provê uma rede social onde você pode se cadastrar e fazer denúncias sobre problemas que você encontra na sua cidade. Você pode postar denúncias, ver as denúncias de outros usuários,
+curtir denúncias que você achou relevantes e comentar essas denúncias.
 
-![Screenshot_20220717135206](https://user-images.githubusercontent.com/104860234/179416232-ad2f593f-2c11-4f2c-ba3f-29b0d61f6bbd.jpg)
+</p>
 
-Essa é a tela de login. O código de autenticação foi feito com o auxílio da ferramenta de autenticação do firebase.
+</br>
 
-![Screenshot_20220717135310](https://user-images.githubusercontent.com/104860234/179416263-bda9e589-5579-4dfe-81d8-aaced5a05f71.jpg)
+<p float="left" align="center">
 
-Essa é a tela de esqueci senha. O usuário informa o email e se o email for encontrado, um email é enviado para ele alterar a senha.
-
-![Screenshot_20220717135510](https://user-images.githubusercontent.com/104860234/179416328-0967de8b-93af-4743-a357-c79dcfccca55.jpg)
-
-Essa é a tela de cadastro, feita utilizando métodos de autenticação do firebase para criar um email e senha válidos.
-
-![Screenshot_20220717135735](https://user-images.githubusercontent.com/104860234/179416418-b88eb499-0a99-4e3d-8dd6-bf8fb4d5bb79.jpg)
-
-Essa é a tela de menu, com botões que direcionarão o user para telas úteis para registrar denúncias e acompanhar seus status de resolução
-e, também, denúncias de outras pessoas que usam o app.
-
-![Screenshot_20220717135947](https://user-images.githubusercontent.com/104860234/179416542-3137b256-5e07-4bb3-a837-73068a162747.jpg)
-
-Acima é a tela para registro de novas denúncias. O spinner serve para que o usuário defina um tipo para a reclamação e depois escreva
-um texto explicando sobre sua reclamação. Todas essas informações são captadas e armazenadas em um banco de dados SQLite.
-
-![Screenshot_20220717140238](https://user-images.githubusercontent.com/104860234/179416666-ca1a1fe4-c183-4807-be32-ae59f6d0ed3e.jpg)
-
-Clicando no segundo botão, o usuário chega nessa tela. É uma tela para o usuário acompanhar as reclamações que ele já enviou, o status
-dessa reclamação, comentários de outros usuários sobre essa reclamação e ele também pode adicionar uma foto que represente a sua 
-reclamação.
-
-![Screenshot_20220717140615](https://user-images.githubusercontent.com/104860234/179416781-a2c7b550-13c3-473f-9fa7-c4398a4843fa.jpg)
-
-E por fim, uma tela para o usuário acompanhar a reclamação de todo mundo que usa o app. Podendo até mesmo adicionar um like para as
-reclamações que ele acha relevantes.
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_194322.png"/>
+  <img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_194432.png"/>
+  <img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_194458.png"/>
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_194549.png"/>
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_194628.png"/>
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_195725.png"/>
+  
 
 
+</p>
+
+## Download
+
+Faça o download da <a href="apk/app-debug.apk?raw=true">APK diretamente</a>. Você pode ver <a href="https://www.google.com/search?q=como+instalar+um+apk+no+android">aqui</a> como instalar uma APK no seu aparelho android.
+
+  
+
+
+## Tecnologias usadas e bibliotecas de código aberto
+
+- Minimum SDK level 21
+- [Linguagem Kotlin](https://kotlinlang.org/)
+
+- Componentes da SDK do android que foram utilizados:
+  - Swipe Refresh Layout: Usado para implementação da atualização da tela ao fazer o swipe na tela.
+  - View Model: Utilizado para fornecer um pouco de desacoplamento entre a camada de dados e a view.
+  - Navigation: Utilizado para facilitar o código da navegação entre telas no app.
+  - Fragment: Os fragments foram utilizados para fornecer uma organização melhor para as telas do meu app. Além de funcionar muito bem com o NvigationComponent.
+  - LiveData: Obedece o ciclo de vida da view e fornece a funcionalidade de observer para variáveis que necessitam ser observadas para notificar quando os dados foram obtidos para fazer todo o processo de atualização das views.
+  - ViewBinding: Fornece uma maneira simples de referenciar os elementos da view nas classes que precisam manipular de alguma forma esses elementos.
+  - Espresso: biblioteca utilizada para fazer testes de ui no meu aplicativo.
+  - JUnit4: biblioteca para conseguir rodar testes automatizados no android studio.
+
+- Arquitetura 
+  - MVVM (View - ViewModel - Model): Utilizada para colocar um intermediário entre a view e a lógica de negócio. No meu app a viewModel presente na arquitetura mvvm me ajuda a separar a lógica de obtenção de dados da camada de view(fragments e activity).
+  - Eu também utilizei uma interface para servir de intermediario entre a api e a classe que deseja obter os dados.
+(Fragments -> ViewModel -> Repository -> api)
+  
+- Bibliotecas 
+  - [Retrofit](https://square.github.io/retrofit/): Biblioteca para fazer requisições HTTP para as APIs.
+  - [Gson Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson): Biblioteca para converter objetos JSON em objetos JAVA compreendíveis no Android Studio.
+  - [okHttp Logging Interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor): Biblioteca que serve para obter Logs mais detalhados das requisições HTTPs.
+  - [Glide](https://github.com/bumptech/glide): Biblioteca para carregar imagens através da url e armazená-las em cache.
+  - [Dagger Hilt](https://dagger.dev/hilt/gradle-setup): Biblioteca usada para injetar a instância do repository na viewModel.
+  - [Hamcrest](https://hamcrest.org/JavaHamcrest/index): Biblioteca usada para prover algumas asserções para facilitar meus testes de ui.
+
+
+## Arquitetura
+**App Resultados Copa 2022** utiliza a arquitetura [MVVM]
+(https://developer.android.com/topic/architecture).
+</br></br>
+<img width="60%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_arquitetura.PNG">
+<br>
+
+## API de terceiros
+
+App Resultados Copa 2022 usa duas apis criadas por mim utilizando github actions. São duas apis: uma para os dados dos jogos e outra para os dados das tabelas. 
+
+## Features
+
+### Ver placar dos jogos e filtrar por grupo, rodada, ou dia atual.
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_20230605_141215.png"/>
+
+
+### Ver tabelas dos grupos e filtrar por grupo.
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_20230605_141302.png"/>
+
+### Suporte para o modo noturno e paisagem.
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_20230608_131430.png"/>
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_20230608_131340.png"/>
+
+
+
+
+
+# Licença
+
+
+
+```xml
+    Copyright [2023] [Rubens Francisco de Assis]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+```
 
 
 
