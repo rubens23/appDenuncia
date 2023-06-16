@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:textColor="@color/white"
     android:fontFamily="@font/lato_regular"
-    android:padding="10dp"
-    android:textSize="24sp">
+    android:padding="4dp"
+    android:textSize="22sp">
 
 </TextView>

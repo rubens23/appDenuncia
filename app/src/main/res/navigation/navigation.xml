@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.appdenunciacliente.ui.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_menuFragment2"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_cadastroFragment"
+            app:destination="@id/cadastroFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_esqueceuSenhaFragment"
+            app:destination="@id/esqueceuSenhaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.appdenunciacliente.ui.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_adicionarDenunciaFragment"
+            app:destination="@id/adicionarDenunciaFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_minhasDenunciasFragment"
+            app:destination="@id/minhasDenunciasFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_denunciasComunidadeFragment"
+            app:destination="@id/denunciasComunidadeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adicionarDenunciaFragment"
+        android:name="com.example.appdenunciacliente.ui.AdicionarDenunciaFragment"
+        android:label="fragment_adicionar_denuncia"
+        tools:layout="@layout/fragment_adicionar_denuncia" />
+    <fragment
+        android:id="@+id/minhasDenunciasFragment"
+        android:name="com.example.appdenunciacliente.ui.MinhasDenunciasFragment"
+        android:label="MinhasDenunciasFragment"
+        tools:layout="@layout/fragment_minhas_denuncias">
+
+        <action
+            android:id="@+id/action_minhasDenunciasFragment_to_comentariosFragment"
+            app:destination="@id/comentariosFragment">
+
+            <argument
+                android:name="denuncia"
+                app:argType="com.example.appdenunciacliente.framework.data.models.Denuncias"/>
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/comentariosFragment"
+        android:name="com.example.appdenunciacliente.ui.ComentariosFragment"
+        android:label="ComentariosFragment"
+        tools:layout="@layout/fragment_comentarios"/>
+    <fragment
+        android:id="@+id/cadastroFragment"
+        android:name="com.example.appdenunciacliente.ui.CadastroFragment"
+        android:label="CadastroFragment"
+        tools:layout="@layout/fragment_cadastro"/>
+    <fragment
+        android:id="@+id/denunciasComunidadeFragment"
+        android:name="com.example.appdenunciacliente.ui.DenunciasComunidadeFragment"
+        android:label="DenunciasComunidadeFragment"
+        tools:layout="@layout/fragment_denuncias_comunidade">
+
+        <action
+            android:id="@+id/action_denunciasComunidadeFragment_to_comentariosFragment"
+            app:destination="@id/comentariosFragment">
+            <argument
+                android:name="denuncia"
+                app:argType="com.example.appdenunciacliente.framework.data.models.Denuncias"/>
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/esqueceuSenhaFragment"
+        android:name="com.example.appdenunciacliente.ui.EsqueceuSenhaFragment"
+        android:label="fragment_esqueceu_senha"
+        tools:layout="@layout/fragment_esqueceu_senha" />
+</navigation>
