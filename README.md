@@ -47,52 +47,45 @@ Faça o download da <a href="apk/app-debug.apk?raw=true">APK diretamente</a>. Vo
 - [Linguagem Kotlin](https://kotlinlang.org/)
 
 - Componentes da SDK do android que foram utilizados:
-  - Swipe Refresh Layout: Usado para implementação da atualização da tela ao fazer o swipe na tela.
-  - View Model: Utilizado para fornecer um pouco de desacoplamento entre a camada de dados e a view.
+  - ViewModel: Utilizado para fornecer um pouco de desacoplamento entre a camada de dados e a view.
   - Navigation: Utilizado para facilitar o código da navegação entre telas no app.
-  - Fragment: Os fragments foram utilizados para fornecer uma organização melhor para as telas do meu app. Além de funcionar muito bem com o NvigationComponent.
-  - LiveData: Obedece o ciclo de vida da view e fornece a funcionalidade de observer para variáveis que necessitam ser observadas para notificar quando os dados foram obtidos para fazer todo o processo de atualização das views.
+  - Fragment: Os fragments foram utilizados para fornecer uma organização melhor para as telas do meu app. Além de funcionar muito bem com o NavigationComponent.
+  - SharedFlow: utilizado como um observer para pegar os valores assim que eles terminam de serem coletados atraves de um método assíncrono. Utilizei ele ao invés do liveData porque queria que o valor não ficasse guardado depois que o fragment fosse reiniciado.
   - ViewBinding: Fornece uma maneira simples de referenciar os elementos da view nas classes que precisam manipular de alguma forma esses elementos.
   - Espresso: biblioteca utilizada para fazer testes de ui no meu aplicativo.
-  - JUnit4: biblioteca para conseguir rodar testes automatizados no android studio.
 
 - Arquitetura 
   - MVVM (View - ViewModel - Model): Utilizada para colocar um intermediário entre a view e a lógica de negócio. No meu app a viewModel presente na arquitetura mvvm me ajuda a separar a lógica de obtenção de dados da camada de view(fragments e activity).
-  - Eu também utilizei uma interface para servir de intermediario entre a api e a classe que deseja obter os dados.
-(Fragments -> ViewModel -> Repository -> api)
+  - Eu também utilizei repositories e classes managers para separar a logica de obtenção dos dados da camada de viewModel.
+(Fragments -> ViewModel -> Repository(Manager) -> apis do firebase)
   
 - Bibliotecas 
-  - [Retrofit](https://square.github.io/retrofit/): Biblioteca para fazer requisições HTTP para as APIs.
-  - [Gson Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson): Biblioteca para converter objetos JSON em objetos JAVA compreendíveis no Android Studio.
-  - [okHttp Logging Interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor): Biblioteca que serve para obter Logs mais detalhados das requisições HTTPs.
-  - [Glide](https://github.com/bumptech/glide): Biblioteca para carregar imagens através da url e armazená-las em cache.
-  - [Dagger Hilt](https://dagger.dev/hilt/gradle-setup): Biblioteca usada para injetar a instância do repository na viewModel.
-  - [Hamcrest](https://hamcrest.org/JavaHamcrest/index): Biblioteca usada para prover algumas asserções para facilitar meus testes de ui.
+  - [Firebase](https://firebase.google.com/?gad=1&gclid=CjwKCAjws7WkBhBFEiwAIi16864LHiVEI5b4n9MrQ5qNyuOaIxlcwvBNFIalIJSvH4lAkYL5sw54qRoCPR8QAvD_BwE&gclsrc=aw.ds&hl=pt-br): Utilizei o serviço de banco de dados do firebase, o serviço de autenticação do firebase e o serviço de storage.
+  - [Picasso](https://square.github.io/picasso/): Biblioteca para carregar imagens através da url e mostrá-las na tela, além de armazená-las em cache.
+  - [Dagger Hilt](https://dagger.dev/hilt/gradle-setup): Biblioteca usada para injetar dependencias nas classes de maneira mais fácil, centralizando a inicialização de classes necessárias em outras classes de maneira única em uma classe só.
+
 
 
 ## Arquitetura
-**App Resultados Copa 2022** utiliza a arquitetura [MVVM]
+**App Denúncia** utiliza a arquitetura [MVVM]
 (https://developer.android.com/topic/architecture).
 </br></br>
-<img width="60%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_arquitetura.PNG">
+<img width="60%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/arquitetura app denuncia.png">
 <br>
 
-## API de terceiros
-
-App Resultados Copa 2022 usa duas apis criadas por mim utilizando github actions. São duas apis: uma para os dados dos jogos e outra para os dados das tabelas. 
 
 ## Features
 
-### Ver placar dos jogos e filtrar por grupo, rodada, ou dia atual.
-<img alt="screenshot" width="30%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_20230605_141215.png"/>
+### Usuários podem se cadastrar para terem acesso ao app.
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_194322.png"/>
 
 
-### Ver tabelas dos grupos e filtrar por grupo.
-<img alt="screenshot" width="30%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_20230605_141302.png"/>
+### Usuários podem postar novas denúncias, ver as denúncias que ele já postou ou ver todas as denúncias circulando na comunidade que usa o app.
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_194432.png"/>
 
-### Suporte para o modo noturno e paisagem.
-<img alt="screenshot" width="30%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_20230608_131430.png"/>
-<img alt="screenshot" width="30%" src="https://github.com/rubens23/App-Resultados-Copa-2022/raw/main/app/src/main/appscreenshots/Screenshot_20230608_131340.png"/>
+### Usuários podem colocar uma foto para representar sua denúncia e também podem curtir ou comentar as denúncias.
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_194628.png"/>
+<img alt="screenshot" width="30%" src="https://github.com/rubens23/appDenuncia/raw/master/app/src/main/appscreenshots/Screenshot_20230616_195725.png"/>
 
 
 
